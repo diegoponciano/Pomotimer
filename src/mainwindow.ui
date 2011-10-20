@@ -312,7 +312,7 @@ QTabBar::tab:hover {
          <x>130</x>
          <y>195</y>
          <width>369</width>
-         <height>25</height>
+         <height>22</height>
         </rect>
        </property>
        <property name="mouseTracking">
@@ -325,9 +325,6 @@ QTabBar::tab:hover {
         <string notr="true">QToolButton { 
 background-color: none;
 border:none;
-}
-QWidget {
-opacity:0.2;
 }</string>
        </property>
        <widget class="QLabel" name="TaskLabel">
@@ -350,7 +347,7 @@ opacity:0.2;
         <property name="geometry">
          <rect>
           <x>310</x>
-          <y>0</y>
+          <y>-2</y>
           <width>24</width>
           <height>26</height>
          </rect>
@@ -363,14 +360,14 @@ opacity:0.2;
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>1317621762_onebit_34.png</normaloff>1317621762_onebit_34.png</iconset>
+          <normaloff>check.png</normaloff>check.png</iconset>
         </property>
        </widget>
        <widget class="QToolButton" name="RemoveTaskButton">
         <property name="geometry">
          <rect>
           <x>340</x>
-          <y>1</y>
+          <y>-1</y>
           <width>24</width>
           <height>22</height>
          </rect>
@@ -383,7 +380,7 @@ opacity:0.2;
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>1317621932_onebit_33.png</normaloff>1317621932_onebit_33.png</iconset>
+          <normaloff>delete.png</normaloff>delete.png</iconset>
         </property>
        </widget>
       </widget>

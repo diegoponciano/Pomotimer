@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Mon Oct 10 22:45:45 2011
+# Created: Thu Oct 20 03:44:12 2011
 #      by: pyside-uic 0.2.13 running on PySide 1.0.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -200,15 +200,12 @@ class Ui_MainWindow(object):
         self.AddTaskButton.setObjectName("AddTaskButton")
         self.horizontalLayout.addWidget(self.AddTaskButton)
         self.task1 = QtGui.QWidget(self.TodoTab)
-        self.task1.setGeometry(QtCore.QRect(130, 195, 369, 25))
+        self.task1.setGeometry(QtCore.QRect(130, 195, 369, 22))
         self.task1.setMouseTracking(True)
         self.task1.setAutoFillBackground(True)
         self.task1.setStyleSheet("QToolButton { \n"
 "background-color: none;\n"
 "border:none;\n"
-"}\n"
-"QWidget {\n"
-"opacity:0.2;\n"
 "}")
         self.task1.setObjectName("task1")
         self.TaskLabel = QtGui.QLabel(self.task1)
@@ -216,52 +213,26 @@ class Ui_MainWindow(object):
         self.TaskLabel.setStyleSheet("")
         self.TaskLabel.setObjectName("TaskLabel")
         self.CompleteTaskButton = QtGui.QToolButton(self.task1)
-        self.CompleteTaskButton.setGeometry(QtCore.QRect(310, 0, 24, 26))
+        self.CompleteTaskButton.setGeometry(QtCore.QRect(310, -2, 24, 26))
         self.CompleteTaskButton.setStyleSheet("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("1317621762_onebit_34.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("check.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.CompleteTaskButton.setIcon(icon)
         self.CompleteTaskButton.setObjectName("CompleteTaskButton")
         self.RemoveTaskButton = QtGui.QToolButton(self.task1)
-        self.RemoveTaskButton.setGeometry(QtCore.QRect(340, 1, 24, 22))
+        self.RemoveTaskButton.setGeometry(QtCore.QRect(340, -1, 24, 22))
         self.RemoveTaskButton.setStyleSheet("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("1317621932_onebit_33.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.RemoveTaskButton.setIcon(icon1)
         self.RemoveTaskButton.setObjectName("RemoveTaskButton")
         self.verticalLayoutWidget = QtGui.QWidget(self.TodoTab)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(140, 54, 371, 28))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(140, 54, 371, 16))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.TasksVertical = QtGui.QVBoxLayout(self.verticalLayoutWidget)
         self.TasksVertical.setSpacing(2)
         self.TasksVertical.setContentsMargins(0, 0, 0, 0)
         self.TasksVertical.setObjectName("TasksVertical")
-        self.task1_2 = QtGui.QWidget(self.verticalLayoutWidget)
-        self.task1_2.setBaseSize(QtCore.QSize(369, 20))
-        palette = QtGui.QPalette()
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Base, brush)
-        brush = QtGui.QBrush(QtGui.QColor(239, 239, 239))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Window, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Base, brush)
-        brush = QtGui.QBrush(QtGui.QColor(239, 239, 239))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Window, brush)
-        brush = QtGui.QBrush(QtGui.QColor(239, 239, 239))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Base, brush)
-        brush = QtGui.QBrush(QtGui.QColor(239, 239, 239))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
-        self.task1_2.setPalette(palette)
-        self.task1_2.setAutoFillBackground(True)
-        self.task1_2.setStyleSheet("")
-        self.task1_2.setObjectName("task1_2")
-        self.TasksVertical.addWidget(self.task1_2)
         self.SummaryTabs.addTab(self.TodoTab, "")
         self.HistoryTab = QtGui.QWidget()
         self.HistoryTab.setObjectName("HistoryTab")

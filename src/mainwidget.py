@@ -91,21 +91,44 @@ class MainWidget(QtGui.QWidget):
       if self.ui.AddTaskEdit.text():
         #self.ui.TaskLabel.setText(str(self.ui.AddTaskEdit.text()))
 
+
+
         containerHeight = self.ui.TasksVertical.parentWidget().size().height()
         self.ui.verticalLayoutWidget.setGeometry(QtCore.QRect(140, 55, 371, containerHeight+23))
 
-        self.ui.task1_5 = QtGui.QWidget(self.ui.verticalLayoutWidget)
+        self.ui.new_task = QtGui.QWidget(self.ui.verticalLayoutWidget)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(239, 239, 239))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Window, brush)
 
-        self.ui.task1_5.setPalette(palette)
-        self.ui.task1_5.setAutoFillBackground(True)
-        self.ui.task1_5.setStyleSheet("")
-        self.ui.task1_5.setObjectName("task1_5")
-        self.ui.task1_5.setGeometry(QtCore.QRect(1, 62, 369, 29))
-        self.ui.TasksVertical.addWidget(self.ui.task1_5)
+        self.ui.new_task.setPalette(palette)
+        self.ui.new_task.setAutoFillBackground(True)
+        self.ui.new_task.setStyleSheet("QToolButton{background-color:none;border:none;}")
+
+        self.ui.new_task.setObjectName("task1_5")
+        self.ui.new_task.setGeometry(QtCore.QRect(1, 62, 369, 29))
+
+        self.ui.new_taskLabel = QtGui.QLabel(self.ui.new_task)
+        self.ui.new_taskLabel.setGeometry(QtCore.QRect(10, 3, 291, 17))
+        self.ui.new_taskLabel.setStyleSheet("")
+        self.ui.new_taskLabel.setObjectName("new_taskLabel")
+        self.ui.new_taskCompleteButton = QtGui.QToolButton(self.ui.new_task)
+        self.ui.new_taskCompleteButton.setGeometry(QtCore.QRect(310, -2, 24, 26))
+        self.ui.new_taskCompleteButton.setStyleSheet("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("check.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.ui.new_taskCompleteButton.setIcon(icon)
+        self.ui.new_taskCompleteButton.setObjectName("new_taskCompleteButton")
+        self.ui.new_taskRemoveButton = QtGui.QToolButton(self.ui.new_task)
+        self.ui.new_taskRemoveButton.setGeometry(QtCore.QRect(340, -1, 24, 22))
+        self.ui.new_taskRemoveButton.setStyleSheet("")
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.ui.new_taskRemoveButton.setIcon(icon1)
+        self.ui.new_taskRemoveButton.setObjectName("new_taskRemoveButton")
+
+        self.ui.TasksVertical.addWidget(self.ui.new_task)
 
       else:
         self.ui.statusbar.showMessage("You must add a description to your task.", 3500)
