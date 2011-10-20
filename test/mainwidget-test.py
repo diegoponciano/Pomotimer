@@ -8,6 +8,7 @@ from PySide.QtCore import QCoreApplication
 
 path = os.path.abspath(os.path.dirname(__file__))
 src_dir = os.path.join(path,os.pardir, 'src')
+os.chdir(src_dir)
 
 if src_dir not in sys.path:
     sys.path.insert(0, src_dir)
