@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import os
 import sys
 import unittest
@@ -5,13 +7,6 @@ from PySide.QtGui import QApplication
 from PySide.QtTest import QTest
 from PySide.QtCore import Qt
 from PySide.QtCore import QCoreApplication
-
-path = os.path.abspath(os.path.dirname(__file__))
-src_dir = os.path.join(path,os.pardir, 'src')
-os.chdir(src_dir)
-
-if src_dir not in sys.path:
-    sys.path.insert(0, src_dir)
 
 import mainwidget
 
