@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created: Thu Oct 20 03:44:12 2011
+# Created: Fri Oct 21 13:04:54 2011
 #      by: pyside-uic 0.2.13 running on PySide 1.0.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -199,33 +199,6 @@ class Ui_MainWindow(object):
         self.AddTaskButton.setAutoFillBackground(False)
         self.AddTaskButton.setObjectName("AddTaskButton")
         self.horizontalLayout.addWidget(self.AddTaskButton)
-        self.task1 = QtGui.QWidget(self.TodoTab)
-        self.task1.setGeometry(QtCore.QRect(130, 195, 369, 22))
-        self.task1.setMouseTracking(True)
-        self.task1.setAutoFillBackground(True)
-        self.task1.setStyleSheet("QToolButton { \n"
-"background-color: none;\n"
-"border:none;\n"
-"}")
-        self.task1.setObjectName("task1")
-        self.TaskLabel = QtGui.QLabel(self.task1)
-        self.TaskLabel.setGeometry(QtCore.QRect(10, 3, 291, 17))
-        self.TaskLabel.setStyleSheet("")
-        self.TaskLabel.setObjectName("TaskLabel")
-        self.CompleteTaskButton = QtGui.QToolButton(self.task1)
-        self.CompleteTaskButton.setGeometry(QtCore.QRect(310, -2, 24, 26))
-        self.CompleteTaskButton.setStyleSheet("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("check.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.CompleteTaskButton.setIcon(icon)
-        self.CompleteTaskButton.setObjectName("CompleteTaskButton")
-        self.RemoveTaskButton = QtGui.QToolButton(self.task1)
-        self.RemoveTaskButton.setGeometry(QtCore.QRect(340, -1, 24, 22))
-        self.RemoveTaskButton.setStyleSheet("")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.RemoveTaskButton.setIcon(icon1)
-        self.RemoveTaskButton.setObjectName("RemoveTaskButton")
         self.verticalLayoutWidget = QtGui.QWidget(self.TodoTab)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(140, 54, 371, 16))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
@@ -260,9 +233,6 @@ class Ui_MainWindow(object):
         self.LongBreakButton.setText(QtGui.QApplication.translate("MainWindow", "long break", None, QtGui.QApplication.UnicodeUTF8))
         self.StartButton.setText(QtGui.QApplication.translate("MainWindow", "start pomodoro", None, QtGui.QApplication.UnicodeUTF8))
         self.AddTaskButton.setText(QtGui.QApplication.translate("MainWindow", "+ add task", None, QtGui.QApplication.UnicodeUTF8))
-        self.TaskLabel.setText(QtGui.QApplication.translate("MainWindow", "TextLabel", None, QtGui.QApplication.UnicodeUTF8))
-        self.CompleteTaskButton.setText(QtGui.QApplication.translate("MainWindow", "...", None, QtGui.QApplication.UnicodeUTF8))
-        self.RemoveTaskButton.setText(QtGui.QApplication.translate("MainWindow", "...", None, QtGui.QApplication.UnicodeUTF8))
         self.SummaryTabs.setTabText(self.SummaryTabs.indexOf(self.TodoTab), QtGui.QApplication.translate("MainWindow", "To-Do Today", None, QtGui.QApplication.UnicodeUTF8))
         self.SummaryTabs.setTabText(self.SummaryTabs.indexOf(self.HistoryTab), QtGui.QApplication.translate("MainWindow", "History", None, QtGui.QApplication.UnicodeUTF8))
         self.SummaryTabs.setTabText(self.SummaryTabs.indexOf(self.StatsTab), QtGui.QApplication.translate("MainWindow", "Stats", None, QtGui.QApplication.UnicodeUTF8))

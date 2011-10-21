@@ -75,9 +75,6 @@ class MainWidget(QtGui.QWidget):
 
         self.ui = self.children()[1]
 
-        hoverOpacity = HoverOpacity(self)
-        self.ui.task1.installEventFilter(hoverOpacity)
-
         self.ui.verticalLayoutWidget.setGeometry(QtCore.QRect(140, 55, 371, 0))
         QtCore.QMetaObject.connectSlotsByName(self)
 
@@ -90,8 +87,6 @@ class MainWidget(QtGui.QWidget):
     def on_AddTaskButton_clicked(self):
       if self.ui.AddTaskEdit.text():
         #self.ui.TaskLabel.setText(str(self.ui.AddTaskEdit.text()))
-
-
 
         containerHeight = self.ui.TasksVertical.parentWidget().size().height()
         self.ui.verticalLayoutWidget.setGeometry(QtCore.QRect(140, 55, 371, containerHeight+23))
@@ -116,6 +111,7 @@ class MainWidget(QtGui.QWidget):
         self.ui.new_taskCompleteButton = QtGui.QToolButton(self.ui.new_task)
         self.ui.new_taskCompleteButton.setGeometry(QtCore.QRect(310, -2, 24, 26))
         self.ui.new_taskCompleteButton.setStyleSheet("")
+
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("check.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.ui.new_taskCompleteButton.setIcon(icon)
@@ -123,10 +119,15 @@ class MainWidget(QtGui.QWidget):
         self.ui.new_taskRemoveButton = QtGui.QToolButton(self.ui.new_task)
         self.ui.new_taskRemoveButton.setGeometry(QtCore.QRect(340, -1, 24, 22))
         self.ui.new_taskRemoveButton.setStyleSheet("")
+
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.ui.new_taskRemoveButton.setIcon(icon1)
         self.ui.new_taskRemoveButton.setObjectName("new_taskRemoveButton")
+
+        hoverOpacity = HoverOpacity(self)
+        hoverOpacity.applyOpacity(self.ui.new_task)
+        self.ui.new_task.installEventFilter(hoverOpacity)
 
         self.ui.TasksVertical.addWidget(self.ui.new_task)
 
