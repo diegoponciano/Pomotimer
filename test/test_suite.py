@@ -13,10 +13,10 @@ if src_dir not in sys.path:
     sys.path.insert(0, src_dir)
 
 import mainwidget_test
-import pomodorolist_test
+import todolist_test
 
 if __name__ == "__main__":
     suite = unittest.TestSuite()
     suite.addTest(unittest.TestLoader().loadTestsFromTestCase(mainwidget_test.MainWidgetTest))
-    suite.addTest(unittest.TestLoader().loadTestsFromTestCase(pomodorolist_test.PomodoroListTest))
-    unittest.TextTestRunner(verbosity=2).run(suite)
+    suite.addTest(unittest.TestLoader().loadTestsFromTestCase(todolist_test.TodoListTest))
+    unittest.TextTestRunner(verbosity=1).run(suite)
