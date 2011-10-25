@@ -31,7 +31,7 @@ class TodoList():
 
   def addItem(self, task):
       if (len(self.tasks) > 0):
-          last_id = list(self.tasks)[-1]
+          last_id = self.tasks.maxKey()
           new_id = last_id+1 
 
       new_task = TodoItem()

@@ -20,6 +20,7 @@ class TodoListTest(unittest.TestCase):
 
         self.assertEqual(tasks_new_size, tasks_size+1)
         self.assertNotEqual(new_task.id, 0)
+        self.assertEqual(new_task.description, 'make tomato')
 
     def test_remove_task(self):
         '''assert item was removed'''
@@ -27,7 +28,7 @@ class TodoListTest(unittest.TestCase):
         another_item = self.todolist.addItem("make another tomato")
 
         tasks_size = len(self.todolist.tasks)
-        item_id = list(self.todolist.tasks)[0]
+        item_id = self.todolist.tasks.minKey()
         self.todolist.removeItem(item_id)
         tasks_new_size = len(self.todolist.tasks)
 
@@ -39,7 +40,7 @@ class TodoListTest(unittest.TestCase):
         another_item = self.todolist.addItem("make another tomato")
 
         tasks_size = len(self.todolist.tasks)
-        item_id = list(self.todolist.tasks)[0]
+        item_id = self.todolist.tasks.minKey()
         self.todolist.removeItem(item_id)
         self.todolist.removeItem(another_item.id)
         tasks_new_size = len(self.todolist.tasks)
