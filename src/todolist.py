@@ -30,13 +30,20 @@ class TodoList():
       self.tasks = self.dbroot['tasks']
 
   def addItem(self, task):
-      tasks_size = len(self.tasks)
-      task_ident = tasks_size+1 
+      if (len(self.tasks) > 0):
+          last_id = list(self.tasks)[-1]
+          new_id = last_id+1 
 
       new_task = TodoItem()
-      new_task.id = task_ident
+      new_task.id = new_id
       new_task.description = task
-      self.tasks[task_ident] = new_task
+      self.tasks[new_id] = new_task
 
       transaction.commit()
-      return self.tasks[task_ident]
+      return self.tasks[new_id]
+
+  def removeItem(self, id):
+      del self.tasks[id]
+
+      transaction.commit()
+      return

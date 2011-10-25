@@ -1,0 +1,29 @@
+#
+# Linux
+#
+
+# Ignore "backup" files which vim and emacs commonly create
+*~
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+
+# Installer logs
+pip-log.txt
+
+# Vim creates swapfiles for open files; ignore these
+.*.swp
+
+# Compiled Python file
+# *.pyc
+*.py[co]
