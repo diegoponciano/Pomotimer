@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import sys
+import pprint
 
 from PySide import QtCore
 from PySide import QtUiTools
@@ -28,9 +29,6 @@ class HoverOpacity(QtCore.QObject):
         elif event.type() == QtCore.QEvent.Leave:
             self.applyOpacity(obj)
             return True
-        elif event.type() == QtCore.QEvent.MouseButtonPress:
-            print "Yay pressed"
-            return True
         else:
             # standard event processing
             return QtCore.QObject.eventFilter(self, obj, event)
@@ -56,6 +54,17 @@ class KeyPressEater(QtCore.QObject):
             # standard event processing
             return QtCore.QObject.eventFilter(self, obj, event)
 
+class MousePressTask(QtCore.QObject):
+    def eventFilter(self, obj, event):
+        if event.type() == QtCore.QEvent.MouseButtonPress:
+            obj.parent().setStyleSheet("QWidget { background-color: #758899;border:2px solid black; }\n"
+"QLabel { border:none; }\n"
+"QToolButton { background-color: none;border:none; }")
+            return True
+        else:
+            # standard event processing
+            return QtCore.QObject.eventFilter(self, obj, event)
+
 class MainWidget(QtGui.QWidget):
 
     def __init__(self, parent=None):
@@ -75,7 +84,7 @@ class MainWidget(QtGui.QWidget):
 
         self.ui = self.children()[1]
 
-        self.ui.verticalLayoutWidget.setGeometry(QtCore.QRect(140, 55, 371, 0))
+        self.ui.verticalLayoutWidget.setGeometry(QtCore.QRect(140, 55, 370, 0))
         QtCore.QMetaObject.connectSlotsByName(self)
 
     @QtCore.Slot()
@@ -89,24 +98,27 @@ class MainWidget(QtGui.QWidget):
         #self.ui.TaskLabel.setText(str(self.ui.AddTaskEdit.text()))
 
         containerHeight = self.ui.TasksVertical.parentWidget().size().height()
-        self.ui.verticalLayoutWidget.setGeometry(QtCore.QRect(140, 55, 371, containerHeight+23))
+        self.ui.verticalLayoutWidget.setGeometry(QtCore.QRect(140, 55, 371, containerHeight+24))
 
-        self.ui.new_task = QtGui.QWidget(self.ui.verticalLayoutWidget)
-        palette = QtGui.QPalette()
-        brush = QtGui.QBrush(QtGui.QColor(239, 239, 239))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Window, brush)
+        tasks_num = str(self.ui.TasksVertical.count() + 1)
 
-        self.ui.new_task.setPalette(palette)
-        self.ui.new_task.setAutoFillBackground(True)
-        self.ui.new_task.setStyleSheet("QToolButton{background-color:none;border:none;}")
+        self.ui.new_frame = QtGui.QFrame(self.ui.verticalLayoutWidget)
+        self.ui.new_frame.setStyleSheet("QWidget { background-color: #fff;border:none; } QLabel { border:none; } QToolButton { background-color: none;border:none; }")
+        self.ui.new_frame.setFrameShape(QtGui.QFrame.StyledPanel)
+        self.ui.new_frame.setFrameShadow(QtGui.QFrame.Raised)
+        self.ui.new_frame.setObjectName("frame_" + tasks_num)
 
-        self.ui.new_task.setObjectName("task1_5")
-        self.ui.new_task.setGeometry(QtCore.QRect(1, 62, 369, 29))
+        self.ui.new_task = QtGui.QWidget(self.ui.new_frame)
+        #self.ui.new_task.setGeometry(QtCore.QRect(1, 62, 369, 22))
+        #self.ui.new_task.setGeometry(QtCore.QRect(0, 0, 369, 29))
+        self.ui.new_task.setGeometry(QtCore.QRect(0, 0, 369, 22))
+        self.ui.new_task.setAutoFillBackground(False)
+        self.ui.new_task.setObjectName("task_" + tasks_num)
 
         self.ui.new_taskLabel = QtGui.QLabel(self.ui.new_task)
         self.ui.new_taskLabel.setGeometry(QtCore.QRect(10, 3, 291, 17))
         self.ui.new_taskLabel.setStyleSheet("")
+        self.ui.new_taskLabel.setText(str(self.ui.AddTaskEdit.text()))
         self.ui.new_taskLabel.setObjectName("new_taskLabel")
         self.ui.new_taskCompleteButton = QtGui.QToolButton(self.ui.new_task)
         self.ui.new_taskCompleteButton.setGeometry(QtCore.QRect(310, -2, 24, 26))
@@ -127,9 +139,11 @@ class MainWidget(QtGui.QWidget):
 
         hoverOpacity = HoverOpacity(self)
         hoverOpacity.applyOpacity(self.ui.new_task)
+        mousePress = MousePressTask(self)
         self.ui.new_task.installEventFilter(hoverOpacity)
+        self.ui.new_task.installEventFilter(mousePress)
 
-        self.ui.TasksVertical.addWidget(self.ui.new_task)
+        self.ui.TasksVertical.addWidget(self.ui.new_frame)
 
       else:
         self.ui.statusbar.showMessage("You must add a description to your task.", 3500)

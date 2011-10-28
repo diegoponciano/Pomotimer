@@ -321,6 +321,8 @@ QTabBar::tab:hover {
         </property>
        </layout>
       </widget>
+      <zorder>horizontalLayoutWidget</zorder>
+      <zorder>verticalLayoutWidget</zorder>
      </widget>
      <widget class="QWidget" name="HistoryTab">
       <attribute name="title">
