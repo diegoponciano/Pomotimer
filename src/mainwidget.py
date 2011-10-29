@@ -86,7 +86,9 @@ class MainWidget(QtGui.QWidget):
 
         self.ui = self.children()[1]
 
-        self.ui.TasksVertical.parent().setGeometry(QtCore.QRect(140, 55, 370, 0))
+        #self.ui.TasksVertical.parent().setGeometry(QtCore.QRect(140, 55, 370, 0))
+        self.ui.TasksVertical.parent().setGeometry(QtCore.QRect(0, 0, 370, 0))
+        self.ui.TaskListWidget.setMinimumSize(300, 0)
         QtCore.QMetaObject.connectSlotsByName(self)
 
     @QtCore.Slot()
@@ -99,7 +101,9 @@ class MainWidget(QtGui.QWidget):
       if self.ui.AddTaskEdit.text():
 
         containerHeight = self.ui.TasksVertical.parentWidget().size().height()
-        self.ui.TasksVertical.parent().setGeometry(QtCore.QRect(140, 55, 371, containerHeight+24))
+        #self.ui.TasksVertical.parent().setGeometry(QtCore.QRect(140, 55, 371, containerHeight+24))
+        self.ui.TasksVertical.parent().setGeometry(QtCore.QRect(0, 0, 371, containerHeight+24))
+        self.ui.TaskListWidget.setMinimumSize(300, containerHeight+24)
 
         tasks_num = str(self.ui.TasksVertical.count() + 1)
 

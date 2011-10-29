@@ -306,20 +306,103 @@ QTabBar::tab:hover {
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="verticalLayoutWidget">
+      <widget class="QScrollArea" name="scrollArea">
        <property name="geometry">
         <rect>
-         <x>140</x>
-         <y>54</y>
-         <width>371</width>
-         <height>16</height>
+         <x>131</x>
+         <y>45</y>
+         <width>399</width>
+         <height>205</height>
         </rect>
        </property>
-       <layout class="QVBoxLayout" name="TasksVertical">
-        <property name="spacing">
-         <number>2</number>
+       <property name="styleSheet">
+        <string notr="true">QWidget { background-color: #F6F6F6; }
+QScrollBar:vertical {
+     border: 2px solid green;
+     background: cyan;
+     width: 10px;
+     margin: 0px 0px 0 0px;
+ }
+
+ QScrollBar::handle:vertical {
+     background: gray;
+     min-height: 20px;
+ }
+
+ QScrollBar::add-line:vertical {
+     background: blue;
+     height: 16px;
+     subcontrol-position: right;
+     subcontrol-origin: margin;
+     border: 2px solid black;
+ }
+
+ QScrollBar::sub-line:vertical {
+     background: magenta;
+     height: 16px;
+     subcontrol-position: top right;
+     subcontrol-origin: margin;
+     border: 2px solid black;
+     position: absolute;
+     right: 20px;
+ }
+
+ QScrollBar:left-arrow:horizontal, QScrollBar::right-arrow:horizontal {
+     width: 3px;
+     height: 3px;
+     background: pink;
+ }
+
+ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+     background: none;
+ }</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="widgetResizable">
+        <bool>true</bool>
+       </property>
+       <widget class="QWidget" name="scrollAreaWidgetContents">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>389</width>
+          <height>538</height>
+         </rect>
         </property>
-       </layout>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QWidget" name="TaskListWidget" native="true">
+           <property name="minimumSize">
+            <size>
+             <width>300</width>
+             <height>520</height>
+            </size>
+           </property>
+           <widget class="QWidget" name="verticalLayoutWidget">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>371</width>
+              <height>16</height>
+             </rect>
+            </property>
+            <layout class="QVBoxLayout" name="TasksVertical">
+             <property name="spacing">
+              <number>2</number>
+             </property>
+            </layout>
+           </widget>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </widget>
      <widget class="QWidget" name="HistoryTab">
