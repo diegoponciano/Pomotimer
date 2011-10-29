@@ -1,0 +1,347 @@
+
+        containerHeight = self.ui.TasksVertical.parentWidget().size().height()
+        self.ui.verticalLayoutWidget.setGeometry(QtCore.QRect(140, 55, 371, containerHeight+23))
+
+        tasks_num = str(self.ui.TasksVertical.count() + 1)
+
+        self.ui.new_frame = QtGui.QFrame(self.ui.verticalLayoutWidget)
+        self.ui.new_frame.setGeometry(QtCore.QRect(1, 62, 369, 22))
+        self.ui.new_frame.setAutoFillBackground(True)
+        self.ui.new_frame.setObjectName("frame_" + tasks_num)
+        self.ui.new_frame.setStyleSheet("QWidget { background-color: #fff;border:2px solid #CCC; }\n"
+"QLabel { border:none; }\n"
+"QToolButton { background-color: none;border:none; }")
+
+        self.ui.new_task = QtGui.QWidget(self.ui.new_frame)
+        #self.ui.new_task = QtGui.QWidget(self.ui.verticalLayoutWidget)
+        #palette = QtGui.QPalette()
+        #brush = QtGui.QBrush(QtGui.QColor(239, 239, 239))
+        #brush.setStyle(QtCore.Qt.SolidPattern)
+        #palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Window, brush)
+
+        #self.ui.new_task.setPalette(palette)
+        #self.ui.new_task.setAutoFillBackground(True)
+        self.ui.new_task.setAutoFillBackground(True)
+        self.ui.new_task.setStyleSheet("QToolButton{background-color:none;border:none;}")
+
+        self.ui.new_task.setObjectName("task_" + tasks_num)
+        #self.ui.new_task.setGeometry(QtCore.QRect(1, 62, 369, 29))
+        self.ui.new_task.setGeometry(QtCore.QRect(0, 0, 369, 29))
+
+        self.ui.new_taskLabel = QtGui.QLabel(self.ui.new_task)
+        self.ui.new_taskLabel.setGeometry(QtCore.QRect(10, 3, 291, 17))
+        self.ui.new_taskLabel.setStyleSheet("")
+        self.ui.new_taskLabel.setObjectName("new_taskLabel")
+        self.ui.new_taskCompleteButton = QtGui.QToolButton(self.ui.new_task)
+        self.ui.new_taskCompleteButton.setGeometry(QtCore.QRect(310, -2, 24, 26))
+        self.ui.new_taskCompleteButton.setStyleSheet("")
+
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("check.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.ui.new_taskCompleteButton.setIcon(icon)
+        self.ui.new_taskCompleteButton.setObjectName("new_taskCompleteButton")
+        self.ui.new_taskRemoveButton = QtGui.QToolButton(self.ui.new_task)
+        self.ui.new_taskRemoveButton.setGeometry(QtCore.QRect(340, -1, 24, 22))
+        self.ui.new_taskRemoveButton.setStyleSheet("")
+
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.ui.new_taskRemoveButton.setIcon(icon1)
+        self.ui.new_taskRemoveButton.setObjectName("new_taskRemoveButton")
+
+        hoverOpacity = HoverOpacity(self)
+        hoverOpacity.applyOpacity(self.ui.new_task)
+        mousePress = MousePressTask(self)
+        self.ui.new_task.installEventFilter(hoverOpacity)
+        self.ui.new_task.installEventFilter(mousePress)
+
+        self.ui.TasksVertical.addWidget(self.ui.new_task)
+
+
+
+
+
+
+
+
+
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <widget name="__qt_fake_top_level">
+  <widget class="QWidget" name="verticalLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>142</x>
+     <y>104</y>
+     <width>369</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="TasksVertical_2">
+    <property name="spacing">
+     <number>2</number>
+    </property>
+    <item>
+     <widget class="QFrame" name="frame">
+      <property name="styleSheet">
+       <string notr="true">QWidget { background-color: #fff;border:none; } QLabel { border:none; } QToolButton { background-color: none;border:none; }</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QWidget" name="task3" native="true">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>369</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <widget class="QLabel" name="TaskLabel_4">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>3</y>
+          <width>291</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+       <widget class="QToolButton" name="CompleteTaskButton_4">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>-2</y>
+          <width>24</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>/home/diego/Dropbox/dev/qt/pomodoro/src/check.png</normaloff>/home/diego/Dropbox/dev/qt/pomodoro/src/check.png</iconset>
+        </property>
+       </widget>
+       <widget class="QToolButton" name="RemoveTaskButton_4">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>-1</y>
+          <width>24</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>/home/diego/Dropbox/dev/qt/pomodoro/src/delete.png</normaloff>/home/diego/Dropbox/dev/qt/pomodoro/src/delete.png</iconset>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="frame_2">
+      <property name="styleSheet">
+       <string notr="true">QWidget { background-color: #fff;border:none; } QLabel { border:none; } QToolButton { background-color: none;border:none; }</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QWidget" name="task3_3" native="true">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>369</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <widget class="QLabel" name="TaskLabel_6">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>3</y>
+          <width>291</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+       <widget class="QToolButton" name="CompleteTaskButton_6">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>-2</y>
+          <width>24</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>/home/diego/Dropbox/dev/qt/pomodoro/src/check.png</normaloff>/home/diego/Dropbox/dev/qt/pomodoro/src/check.png</iconset>
+        </property>
+       </widget>
+       <widget class="QToolButton" name="RemoveTaskButton_6">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>-1</y>
+          <width>24</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>/home/diego/Dropbox/dev/qt/pomodoro/src/delete.png</normaloff>/home/diego/Dropbox/dev/qt/pomodoro/src/delete.png</iconset>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="frame_3">
+      <property name="styleSheet">
+       <string notr="true">QWidget { background-color: #fff;border:none; } QLabel { border:none; } QToolButton { background-color: none;border:none; }</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QWidget" name="task3_4" native="true">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>369</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <widget class="QLabel" name="TaskLabel_7">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>3</y>
+          <width>291</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+       <widget class="QToolButton" name="CompleteTaskButton_7">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>-2</y>
+          <width>24</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>/home/diego/Dropbox/dev/qt/pomodoro/src/check.png</normaloff>/home/diego/Dropbox/dev/qt/pomodoro/src/check.png</iconset>
+        </property>
+       </widget>
+       <widget class="QToolButton" name="RemoveTaskButton_7">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>-1</y>
+          <width>24</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>/home/diego/Dropbox/dev/qt/pomodoro/src/delete.png</normaloff>/home/diego/Dropbox/dev/qt/pomodoro/src/delete.png</iconset>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+</ui>
+
