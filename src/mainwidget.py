@@ -57,9 +57,11 @@ class KeyPressEater(QtCore.QObject):
 class MousePressTask(QtCore.QObject):
     def eventFilter(self, obj, event):
         if event.type() == QtCore.QEvent.MouseButtonPress:
-            obj.parent().setStyleSheet("QWidget { background-color: #758899;border:2px solid black; }\n"
-"QLabel { border:none; }\n"
-"QToolButton { background-color: none;border:none; }")
+            if not "border:2px solid black" in obj.parent().styleSheet():
+                #obj.parent().setStyleSheet("QWidget { background-color: #758899;border:2px solid black; } QLabel { border:none; } QToolButton { background-color: none;border:none; }")
+                obj.parent().setStyleSheet("QWidget { background-color: #fff;border:2px solid black; } QLabel { border:none; } QToolButton { background-color: none;border:none; }")
+            else:
+                obj.parent().setStyleSheet("QWidget { background-color: #fff;border:none; } QLabel { border:none; } QToolButton { background-color: none;border:none; }")
             return True
         else:
             # standard event processing
@@ -84,7 +86,7 @@ class MainWidget(QtGui.QWidget):
 
         self.ui = self.children()[1]
 
-        self.ui.verticalLayoutWidget.setGeometry(QtCore.QRect(140, 55, 370, 0))
+        self.ui.TasksVertical.parent().setGeometry(QtCore.QRect(140, 55, 370, 0))
         QtCore.QMetaObject.connectSlotsByName(self)
 
     @QtCore.Slot()
@@ -95,14 +97,13 @@ class MainWidget(QtGui.QWidget):
     @QtCore.Slot()
     def on_AddTaskButton_clicked(self):
       if self.ui.AddTaskEdit.text():
-        #self.ui.TaskLabel.setText(str(self.ui.AddTaskEdit.text()))
 
         containerHeight = self.ui.TasksVertical.parentWidget().size().height()
-        self.ui.verticalLayoutWidget.setGeometry(QtCore.QRect(140, 55, 371, containerHeight+24))
+        self.ui.TasksVertical.parent().setGeometry(QtCore.QRect(140, 55, 371, containerHeight+24))
 
         tasks_num = str(self.ui.TasksVertical.count() + 1)
 
-        self.ui.new_frame = QtGui.QFrame(self.ui.verticalLayoutWidget)
+        self.ui.new_frame = QtGui.QFrame(self.ui.TasksVertical.parent().parent())
         self.ui.new_frame.setStyleSheet("QWidget { background-color: #fff;border:none; } QLabel { border:none; } QToolButton { background-color: none;border:none; }")
         self.ui.new_frame.setFrameShape(QtGui.QFrame.StyledPanel)
         self.ui.new_frame.setFrameShadow(QtGui.QFrame.Raised)
