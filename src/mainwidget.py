@@ -102,7 +102,6 @@ class TodoListWidget(QtCore.QObject):
     row = str(listWidget.indexFromItem(item).row())
 
     new_frame = QtGui.QFrame()
-    new_frame.setStyleSheet("QWidget { background-color: #fff;border:none; } QLabel { border:none; } QToolButton { background-color: none;border:none; }")
     new_frame.setFrameShape(QtGui.QFrame.StyledPanel)
     new_frame.setFrameShadow(QtGui.QFrame.Raised)
     new_frame.setObjectName("frame_" + row)
