@@ -17,7 +17,11 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#ShortBreakButton,#LongBreakButton,#PomodoroButton {
+   <string notr="true"/>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">#ShortBreakButton,#LongBreakButton,#PomodoroButton {
 	border: 1px solid #8f8f91;
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FBFBFB, stop: 1 #E0E0E0);
 	min-width: 80px;
@@ -38,18 +42,7 @@
 	border-bottom-right-radius: 6px;
 	border-left: 0px;
 }
-#StartButton {
-	border: 1px solid #8f8f91;
-	border-radius:5px;
-	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #4FE455, stop: 1 #12A719);
-	color:white;
-	min-width: 180px;
-	height:60px;
-	font-size:17px/20px;
-}
-#StartButton:hover {
-	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #3FF047, stop: 1 #15B91D);
-}
+
 #AddTaskEdit {
 	height:20px;
 	margin:0;
@@ -87,8 +80,7 @@ QPushButton:default {
 }
 
 </string>
-  </property>
-  <widget class="QWidget" name="centralwidget">
+   </property>
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
@@ -153,6 +145,20 @@ QPushButton:default {
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	border: 1px solid #8f8f91;
+	border-radius:5px;
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #4FE455, stop: 1 #12A719);
+	color:white;
+	min-width: 180px;
+	height:60px;
+	font-size:17px/20px;
+}
+QPushButton:hover {
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #3FF047, stop: 1 #15B91D);
+}</string>
        </property>
        <property name="text">
         <string>start pomodoro</string>
@@ -306,17 +312,22 @@ QTabBar::tab:hover {
         </item>
        </layout>
       </widget>
-      <widget class="QScrollArea" name="scrollArea">
+      <widget class="QListWidget" name="listWidget">
        <property name="geometry">
         <rect>
-         <x>131</x>
-         <y>45</y>
-         <width>399</width>
-         <height>205</height>
+         <x>140</x>
+         <y>56</y>
+         <width>380</width>
+         <height>195</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">QWidget { background-color: #F6F6F6; }
+        <string notr="true"> QListView {
+     background-color: #f6f6f6;
+ }
+ QListView::item:selected {
+     border: 1px solid #6a6ea9;
+ }
 QScrollBar:vertical {
      border: 2px solid green;
      background: cyan;
@@ -355,55 +366,15 @@ QScrollBar::add-line:vertical {
      background: none;
  }</string>
        </property>
-       <property name="frameShape">
-        <enum>QFrame::NoFrame</enum>
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
        </property>
-       <property name="widgetResizable">
-        <bool>true</bool>
+       <property name="horizontalScrollBarPolicy">
+        <enum>Qt::ScrollBarAlwaysOff</enum>
        </property>
-       <widget class="QWidget" name="scrollAreaWidgetContents">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>389</width>
-          <height>535</height>
-         </rect>
-        </property>
-        <property name="autoFillBackground">
-         <bool>false</bool>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
-         <property name="topMargin">
-          <number>6</number>
-         </property>
-         <item>
-          <widget class="QWidget" name="TaskListWidget" native="true">
-           <property name="minimumSize">
-            <size>
-             <width>300</width>
-             <height>520</height>
-            </size>
-           </property>
-           <widget class="QWidget" name="verticalLayoutWidget">
-            <property name="geometry">
-             <rect>
-              <x>0</x>
-              <y>0</y>
-              <width>371</width>
-              <height>16</height>
-             </rect>
-            </property>
-            <layout class="QVBoxLayout" name="TasksVertical">
-             <property name="spacing">
-              <number>2</number>
-             </property>
-            </layout>
-           </widget>
-          </widget>
-         </item>
-        </layout>
-       </widget>
+       <property name="spacing">
+        <number>1</number>
+       </property>
       </widget>
      </widget>
      <widget class="QWidget" name="HistoryTab">
