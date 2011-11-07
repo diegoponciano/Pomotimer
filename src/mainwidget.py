@@ -45,28 +45,6 @@ class HoverOpacity(QtCore.QObject):
           effect.setOpacity(0.8)
           element.setGraphicsEffect(effect)
 
-class KeyPressEater(QtCore.QObject):
-    def eventFilter(self, obj, event):
-        if event.type() == QtCore.QEvent.KeyPress:
-            print "Ate key press", event.key()
-            return True
-        else:
-            # standard event processing
-            return QtCore.QObject.eventFilter(self, obj, event)
-
-class MousePressTask(QtCore.QObject):
-    def eventFilter(self, obj, event):
-        if event.type() == QtCore.QEvent.MouseButtonPress:
-            if not "border:2px solid black" in obj.parent().styleSheet():
-                #obj.parent().setStyleSheet("QWidget { background-color: #758899;border:2px solid black; } QLabel { border:none; } QToolButton { background-color: none;border:none; }")
-                obj.parent().setStyleSheet("QWidget { background-color: #fff;border:2px solid black; } QLabel { border:none; } QToolButton { background-color: none;border:none; }")
-            else:
-                obj.parent().setStyleSheet("QWidget { background-color: #fff;border:none; } QLabel { border:none; } QToolButton { background-color: none;border:none; }")
-            return True
-        else:
-            # standard event processing
-            return QtCore.QObject.eventFilter(self, obj, event)
-
 class MainWidget(QtGui.QWidget):
 
     def __init__(self, parent=None):
