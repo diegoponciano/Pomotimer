@@ -72,7 +72,7 @@ class TodoListWidget(QtCore.QObject):
   def __init__(self):
     QtCore.QObject.__init__(self)
 
-  def doAddTask(self, pressed, listWidget, labelText):
+  def newItem(self, pressed, listWidget, labelText):
 
     item = QtGui.QListWidgetItem()
     item.setSizeHint(QtCore.QSize(368,22))
@@ -140,11 +140,15 @@ class MainWindow(QtGui.QMainWindow):
 
         self.ui.AddTaskButton.clicked[bool].connect(self.addTask)
 
-        QtCore.QMetaObject.connectSlotsByName(self.ui)
+        QtCore.QMetaObject.connectSlotsByName(self.ui.centralwidget)
         #self.create_menus()
 
     @QtCore.Slot()
     def on_AddTaskButton_clicked(self):
+      print 'oi'
+
+    @QtCore.Slot()
+    def on_StartButton_clicked(self):
       print 'oi'
 
     @QtCore.Slot(str)
@@ -157,7 +161,7 @@ class MainWindow(QtGui.QMainWindow):
     def addTask(self):
       if self.ui.AddTaskEdit.text():
         todoListWidget = TodoListWidget()
-        todoListWidget.doAddTask(True, self.ui.listWidget, self.ui.AddTaskEdit.text())
+        todoListWidget.newItem(True, self.ui.listWidget, self.ui.AddTaskEdit.text())
       else:
         self.ui.statusbar.showMessage("You must add a description to your task.", 3500)
 
