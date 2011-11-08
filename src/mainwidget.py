@@ -102,17 +102,10 @@ class TodoListWidget(QtCore.QObject):
     new_taskLabel.setText(labelText)
     new_taskLabel.setObjectName("taskLabel_" + row)
 
-    #new_taskCompleteButton = QtGui.QToolButton(new_task)
-    #new_taskCompleteButton.setGeometry(QtCore.QRect(310, -2, 24, 26))
     new_taskRemoveButton = QtGui.QToolButton(new_task)
     new_taskRemoveButton.setGeometry(QtCore.QRect(340, -2, 24, 26))
     new_taskStartButton = QtGui.QToolButton(new_task)
     new_taskStartButton.setGeometry(QtCore.QRect(5, -2, 24, 26))
-
-    #icon = QtGui.QIcon()
-    #icon.addPixmap(QtGui.QPixmap("check.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-    #new_taskCompleteButton.setIcon(icon)
-    #new_taskCompleteButton.setObjectName("taskCompleteButton" + row)
 
     icon1 = QtGui.QIcon()
     icon1.addPixmap(QtGui.QPixmap("delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -286,21 +279,16 @@ class MainWindow(QtGui.QMainWindow):
         uifile = QtCore.QFile("./mainwindow.ui")
         self.ui = loader.load(uifile)
         self.resize(670, 480)
-        #self.setCentralWidget(self.ui.centralwidget)
         self.setCentralWidget(self.ui)
 
         self.ui.AddTaskButton.clicked[bool].connect(self.on_addTask_clicked)
+        self.ui.statusbar.messageChanged.connect(self.on_statusbar_messageChanged)
 
         QtCore.QMetaObject.connectSlotsByName(self.ui.centralwidget)
         #self.create_menus()
 
         self.todoListWidget = TodoListWidget(self.ui, self.ui.listWidget)
 
-    @QtCore.Slot()
-    def on_StartButton_clicked(self):
-      print 'oi'
-
-    @QtCore.Slot(str)
     def on_statusbar_messageChanged(self, text):
         if text:
             changeActiveColor(self.ui.statusbar, QtGui.QColor(255,170,0))
