@@ -169,9 +169,7 @@ class TodoListWidget(QtCore.QObject):
     for item in self.tasks.findItems('', QtCore.Qt.MatchRegExp):
       itemWidget = self.tasks.itemWidget(item)
       itemWidget.setEnabled(False)
-
-      self.current_item.setEnabled(True)
-  
+    self.current_item.setEnabled(True)
     removeButton = self.current_item.findChild(QtGui.QToolButton, "taskRemoveButton_"+str(self.current_row))
     removeButton.setEnabled(False)
 
