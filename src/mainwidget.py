@@ -74,7 +74,7 @@ class TodoListWidget(QtCore.QObject):
     self.window = window
     self.tasks = listWidget
     self.task_in_progress = False
-    self.current_task = None 
+    self.current_row = '' 
     self.current_item = None 
     self.start_event = self.on_start_clicked 
 
@@ -137,16 +137,12 @@ class TodoListWidget(QtCore.QObject):
     self.tasks.takeItem(row)
 
   def on_start_clicked(self, pressed, item):
+    self.current_row = self.tasks.indexFromItem(item).row()
+    self.current_item = self.tasks.itemWidget(item)
+
     self.disableItems()
 
-    row = self.tasks.indexFromItem(item).row()
-    self.current_item = self.tasks.itemWidget(item)
-    self.current_item.setEnabled(True)
-
-    removeButton = self.current_item.findChild(QtGui.QToolButton, "taskRemoveButton_"+str(row))
-    removeButton.setEnabled(False)
-
-    startButton = self.current_item.findChild(QtGui.QToolButton, "taskStartButton_"+str(row))
+    startButton = self.current_item.findChild(QtGui.QToolButton, "taskStartButton_"+str(self.current_row))
     icon = QtGui.QIcon()
     icon.addPixmap(QtGui.QPixmap("stop.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
     startButton.setIcon(icon)
@@ -155,17 +151,30 @@ class TodoListWidget(QtCore.QObject):
   def on_stop_clicked(self, pressed, item):
     reply = QtGui.QMessageBox.question(self.window, 'Smash?', "Do you want to smash this tomato?", QtGui.QMessageBox.Yes | QtGui.QMessageBox.No, QtGui.QMessageBox.No)
     if reply == QtGui.QMessageBox.Yes:
-      row = self.tasks.indexFromItem(item).row()
-      startButton = self.current_item.findChild(QtGui.QToolButton, "taskStartButton_"+str(row))
+      startButton = self.current_item.findChild(QtGui.QToolButton, "taskStartButton_"+str(self.current_row))
       icon = QtGui.QIcon()
       icon.addPixmap(QtGui.QPixmap("start.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
       startButton.setIcon(icon)
+      self.enableItems()
       self.start_event = self.on_start_clicked 
-  
+   
+  def enableItems(self):
+    for item in self.tasks.findItems('', QtCore.Qt.MatchRegExp):
+      itemWidget = self.tasks.itemWidget(item)
+      itemWidget.setEnabled(True)
+    removeButton = self.current_item.findChild(QtGui.QToolButton, "taskRemoveButton_"+str(self.current_row))
+    removeButton.setEnabled(True)
+ 
   def disableItems(self):
     for item in self.tasks.findItems('', QtCore.Qt.MatchRegExp):
       itemWidget = self.tasks.itemWidget(item)
       itemWidget.setEnabled(False)
+
+      self.current_item.setEnabled(True)
+  
+    removeButton = self.current_item.findChild(QtGui.QToolButton, "taskRemoveButton_"+str(self.current_row))
+    removeButton.setEnabled(False)
+
 
 class PomoTimer(object):
   def __init__(self, label, totalTime, callback):
