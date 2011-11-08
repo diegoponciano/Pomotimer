@@ -183,19 +183,17 @@ class TodoListWidget(QtCore.QObject):
 
 normal_style = """
  QLabel {
-   color: white;
-   background-color: black;
-   font-size: 180pt;
-   font-family: "DejaVu Sans Mono";
+   color: black;
+   font-size: 120pt;
+   font-family: "PT Sans";
    font-weight: bold;
 }"""
 
 warning_style = """
  QLabel {
    color: red;
-   background-color: black;
-   font-size: 180pt;
-   font-family: "DejaVu Sans Mono";
+   font-size: 120pt;
+   font-family: "PT Sans";
    font-weight: bold;
 }"""
 
@@ -203,8 +201,8 @@ negative_style = """
  QLabel {
    color: black;
    background-color: red;
-   font-size: 180pt;
-   font-family: "DejaVu Sans Mono";
+   font-size: 120pt;
+   font-family: "PT Sans";
    font-weight: bold;
 }"""
 
@@ -212,8 +210,8 @@ standby_style = """
  QLabel {
    color: green;
    background-color: black;
-   font-size: 100pt;
-   font-family: "DejaVu Sans Mono";
+   font-size: 80pt;
+   font-family: "PT Sans";
    font-weight: bold;
 }"""
 
@@ -258,22 +256,22 @@ class PomoTimer(object):
 
     # States:
   def standingby(self):
-        #self.label.setStyleSheet(standby_style)
+        self.label.setStyleSheet(standby_style)
         self.label.setText("TEDxSkopje")
 
   def stopped(self):
-        #self.label.setStyleSheet(normal_style)
+        self.label.setStyleSheet(normal_style)
         self.label.setText("00:00")
 
   def countdown(self):
         if self.remainingTime < 0:
-            #self.label.setStyleSheet(negative_style)
+            self.label.setStyleSheet(negative_style)
             self.label.setText("%02d:%02d" % divmod(abs(self.remainingTime), 60))
         elif self.remainingTime < 60:
-            #self.label.setStyleSheet(warning_style)
+            self.label.setStyleSheet(warning_style)
             self.label.setText("%02d:%02d" % divmod(self.remainingTime, 60))
         else:
-            #self.label.setStyleSheet(normal_style)
+            self.label.setStyleSheet(normal_style)
             self.label.setText("%02d:%02d" % divmod(self.remainingTime, 60))
 
 
