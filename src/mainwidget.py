@@ -74,8 +74,9 @@ class TodoListWidget(QtCore.QObject):
     self.window = window
     self.tasks = listWidget
     self.task_in_progress = False
-    self.current_row = '' 
-    self.current_item = None 
+    self.row = '' 
+    self.item = None 
+    self.pomotimer = None 
     self.start_event = self.on_start_clicked 
 
   def newItem(self, labelText):
@@ -137,42 +138,84 @@ class TodoListWidget(QtCore.QObject):
     self.tasks.takeItem(row)
 
   def on_start_clicked(self, pressed, item):
-    self.current_row = self.tasks.indexFromItem(item).row()
-    self.current_item = self.tasks.itemWidget(item)
+    self.row = self.tasks.indexFromItem(item).row()
+    self.item = self.tasks.itemWidget(item)
 
     self.disableItems()
 
-    startButton = self.current_item.findChild(QtGui.QToolButton, "taskStartButton_"+str(self.current_row))
+    startBtn = self.item.findChild(QtGui.QToolButton, "taskStartButton_"+str(self.row))
     icon = QtGui.QIcon()
     icon.addPixmap(QtGui.QPixmap("stop.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-    startButton.setIcon(icon)
+    startBtn.setIcon(icon)
     self.start_event = self.on_stop_clicked 
+
+    self.pomotimer = PomoTimer(self.window.TimerLabel, 25*60, self.tomatoFinished)
+    self.pomotimer.start()
   
   def on_stop_clicked(self, pressed, item):
     reply = QtGui.QMessageBox.question(self.window, 'Smash?', "Do you want to smash this tomato?", QtGui.QMessageBox.Yes | QtGui.QMessageBox.No, QtGui.QMessageBox.No)
     if reply == QtGui.QMessageBox.Yes:
-      startButton = self.current_item.findChild(QtGui.QToolButton, "taskStartButton_"+str(self.current_row))
+      startBtn = self.item.findChild(QtGui.QToolButton, "taskStartButton_"+str(self.row))
       icon = QtGui.QIcon()
       icon.addPixmap(QtGui.QPixmap("start.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-      startButton.setIcon(icon)
+      startBtn.setIcon(icon)
       self.enableItems()
       self.start_event = self.on_start_clicked 
+      self.pomotimer.stop()
    
   def enableItems(self):
     for item in self.tasks.findItems('', QtCore.Qt.MatchRegExp):
       itemWidget = self.tasks.itemWidget(item)
       itemWidget.setEnabled(True)
-    removeButton = self.current_item.findChild(QtGui.QToolButton, "taskRemoveButton_"+str(self.current_row))
-    removeButton.setEnabled(True)
+    removeBtn = self.item.findChild(QtGui.QToolButton, "taskRemoveButton_"+str(self.row))
+    removeBtn.setEnabled(True)
  
   def disableItems(self):
     for item in self.tasks.findItems('', QtCore.Qt.MatchRegExp):
       itemWidget = self.tasks.itemWidget(item)
       itemWidget.setEnabled(False)
-    self.current_item.setEnabled(True)
-    removeButton = self.current_item.findChild(QtGui.QToolButton, "taskRemoveButton_"+str(self.current_row))
-    removeButton.setEnabled(False)
+    self.item.setEnabled(True)
+    removeBtn = self.item.findChild(QtGui.QToolButton, "taskRemoveButton_"+str(self.row))
+    removeBtn.setEnabled(False)
 
+  def tomatoFinished(self):
+    pass
+
+normal_style = """
+ QLabel {
+   color: white;
+   background-color: black;
+   font-size: 180pt;
+   font-family: "DejaVu Sans Mono";
+   font-weight: bold;
+}"""
+
+warning_style = """
+ QLabel {
+   color: red;
+   background-color: black;
+   font-size: 180pt;
+   font-family: "DejaVu Sans Mono";
+   font-weight: bold;
+}"""
+
+negative_style = """
+ QLabel {
+   color: black;
+   background-color: red;
+   font-size: 180pt;
+   font-family: "DejaVu Sans Mono";
+   font-weight: bold;
+}"""
+
+standby_style = """
+ QLabel {
+   color: green;
+   background-color: black;
+   font-size: 100pt;
+   font-family: "DejaVu Sans Mono";
+   font-weight: bold;
+}"""
 
 class PomoTimer(object):
   def __init__(self, label, totalTime, callback):
@@ -215,22 +258,22 @@ class PomoTimer(object):
 
     # States:
   def standingby(self):
-        self.label.setStyleSheet(standby_style)
+        #self.label.setStyleSheet(standby_style)
         self.label.setText("TEDxSkopje")
 
   def stopped(self):
-        self.label.setStyleSheet(normal_style)
+        #self.label.setStyleSheet(normal_style)
         self.label.setText("00:00")
 
   def countdown(self):
         if self.remainingTime < 0:
-            self.label.setStyleSheet(negative_style)
+            #self.label.setStyleSheet(negative_style)
             self.label.setText("%02d:%02d" % divmod(abs(self.remainingTime), 60))
         elif self.remainingTime < 60:
-            self.label.setStyleSheet(warning_style)
+            #self.label.setStyleSheet(warning_style)
             self.label.setText("%02d:%02d" % divmod(self.remainingTime, 60))
         else:
-            self.label.setStyleSheet(normal_style)
+            #self.label.setStyleSheet(normal_style)
             self.label.setText("%02d:%02d" % divmod(self.remainingTime, 60))
 
 
@@ -253,7 +296,7 @@ class MainWindow(QtGui.QMainWindow):
         QtCore.QMetaObject.connectSlotsByName(self.ui.centralwidget)
         #self.create_menus()
 
-        self.todoListWidget = TodoListWidget(self, self.ui.listWidget)
+        self.todoListWidget = TodoListWidget(self.ui, self.ui.listWidget)
 
     @QtCore.Slot()
     def on_StartButton_clicked(self):

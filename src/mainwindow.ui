@@ -165,13 +165,13 @@ QPushButton:default {
       <widget class="QLabel" name="TimerLabel">
        <property name="font">
         <font>
-         <pointsize>16</pointsize>
+         <pointsize>24</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
        <property name="text">
-        <string>25:00</string>
+        <string>00:00</string>
        </property>
       </widget>
      </item>
