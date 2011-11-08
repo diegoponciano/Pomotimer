@@ -69,15 +69,21 @@ class MainWidget(QtGui.QWidget):
         QtCore.QMetaObject.connectSlotsByName(self)
 
 class TodoListWidget(QtCore.QObject):
-  def __init__(self):
+  def __init__(self, window, listWidget):
     QtCore.QObject.__init__(self)
+    self.window = window
+    self.tasks = listWidget
+    self.task_in_progress = False
+    self.current_task = None 
+    self.current_item = None 
+    self.start_event = self.on_start_clicked 
 
-  def newItem(self, pressed, listWidget, labelText):
+  def newItem(self, labelText):
 
     item = QtGui.QListWidgetItem()
-    item.setSizeHint(QtCore.QSize(368,22))
-    listWidget.addItem(item)
-    row = str(listWidget.indexFromItem(item).row())
+    item.setSizeHint(QtCore.QSize(378,22))
+    self.tasks.addItem(item)
+    row = str(self.tasks.indexFromItem(item).row())
 
     new_frame = QtGui.QFrame()
     new_frame.setFrameShape(QtGui.QFrame.StyledPanel)
@@ -85,44 +91,82 @@ class TodoListWidget(QtCore.QObject):
     new_frame.setObjectName("frame_" + row)
 
     new_task = QtGui.QWidget(new_frame)
-    new_task.setGeometry(QtCore.QRect(0, 0, 368, 22))
+    new_task.setGeometry(QtCore.QRect(0, 0, 378, 22))
     new_task.setAutoFillBackground(False)
     new_task.setObjectName("task_" + row)
 
     new_taskLabel = QtGui.QLabel(new_task)
-    new_taskLabel.setGeometry(QtCore.QRect(10, 3, 291, 17))
+    new_taskLabel.setGeometry(QtCore.QRect(40, 3, 291, 17))
     new_taskLabel.setStyleSheet("")
     new_taskLabel.setText(labelText)
-    new_taskLabel.setObjectName("taskLabel" + row)
+    new_taskLabel.setObjectName("taskLabel_" + row)
 
-    new_taskCompleteButton = QtGui.QToolButton(new_task)
-    new_taskCompleteButton.setGeometry(QtCore.QRect(310, -2, 24, 26))
+    #new_taskCompleteButton = QtGui.QToolButton(new_task)
+    #new_taskCompleteButton.setGeometry(QtCore.QRect(310, -2, 24, 26))
     new_taskRemoveButton = QtGui.QToolButton(new_task)
     new_taskRemoveButton.setGeometry(QtCore.QRect(340, -2, 24, 26))
+    new_taskStartButton = QtGui.QToolButton(new_task)
+    new_taskStartButton.setGeometry(QtCore.QRect(5, -2, 24, 26))
 
-    icon = QtGui.QIcon()
-    icon.addPixmap(QtGui.QPixmap("check.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-    new_taskCompleteButton.setIcon(icon)
-    new_taskCompleteButton.setObjectName("taskCompleteButton" + row)
+    #icon = QtGui.QIcon()
+    #icon.addPixmap(QtGui.QPixmap("check.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+    #new_taskCompleteButton.setIcon(icon)
+    #new_taskCompleteButton.setObjectName("taskCompleteButton" + row)
 
     icon1 = QtGui.QIcon()
     icon1.addPixmap(QtGui.QPixmap("delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
     new_taskRemoveButton.setIcon(icon1)
-    new_taskRemoveButton.setObjectName("taskRemoveButton" + row)
+    new_taskRemoveButton.setObjectName("taskRemoveButton_" + row)
+
+    icon2 = QtGui.QIcon()
+    icon2.addPixmap(QtGui.QPixmap("start.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+    new_taskStartButton.setIcon(icon2)
+    new_taskStartButton.setObjectName("taskStartButton_" + row)
 
     hoverOpacity = HoverOpacity(self)
     hoverOpacity.applyOpacity(new_task)
     new_task.installEventFilter(hoverOpacity)
-    #mousePress = MousePressTask(self)
-    #new_task.installEventFilter(mousePress)
 
-    listWidget.setItemWidget(item, new_frame)
+    self.tasks.setItemWidget(item, new_frame)
 
-    new_taskRemoveButton.clicked[bool].connect(lambda a: self.doRemove(a, listWidget, item))
+    new_taskRemoveButton.clicked[bool].connect(lambda a: self.removeItem(a, item))
+    new_taskStartButton.clicked[bool].connect(lambda a: self.start_event(a, item))
 
-  def doRemove(self, pressed, listWidget, item):
-    row = listWidget.indexFromItem(item).row()
-    listWidget.takeItem(row)
+  def removeItem(self, pressed, item):
+    row = self.tasks.indexFromItem(item).row()
+    self.tasks.takeItem(row)
+
+  def on_start_clicked(self, pressed, item):
+    self.disableItems()
+
+    row = self.tasks.indexFromItem(item).row()
+    self.current_item = self.tasks.itemWidget(item)
+    self.current_item.setEnabled(True)
+
+    removeButton = self.current_item.findChild(QtGui.QToolButton, "taskRemoveButton_"+str(row))
+    removeButton.setEnabled(False)
+
+    startButton = self.current_item.findChild(QtGui.QToolButton, "taskStartButton_"+str(row))
+    icon = QtGui.QIcon()
+    icon.addPixmap(QtGui.QPixmap("stop.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+    startButton.setIcon(icon)
+    self.start_event = self.on_stop_clicked 
+  
+  def on_stop_clicked(self, pressed, item):
+    reply = QtGui.QMessageBox.question(self.window, 'Smash?', "Do you want to smash this tomato?", QtGui.QMessageBox.Yes | QtGui.QMessageBox.No, QtGui.QMessageBox.No)
+    if reply == QtGui.QMessageBox.Yes:
+      row = self.tasks.indexFromItem(item).row()
+      startButton = self.current_item.findChild(QtGui.QToolButton, "taskStartButton_"+str(row))
+      icon = QtGui.QIcon()
+      icon.addPixmap(QtGui.QPixmap("start.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+      startButton.setIcon(icon)
+      self.start_event = self.on_start_clicked 
+  
+  def disableItems(self):
+    for item in self.tasks.findItems('', QtCore.Qt.MatchRegExp):
+      itemWidget = self.tasks.itemWidget(item)
+      itemWidget.setEnabled(False)
+
 
 class MainWindow(QtGui.QMainWindow):
 
@@ -138,14 +182,12 @@ class MainWindow(QtGui.QMainWindow):
         #self.setCentralWidget(self.ui.centralwidget)
         self.setCentralWidget(self.ui)
 
-        self.ui.AddTaskButton.clicked[bool].connect(self.addTask)
+        self.ui.AddTaskButton.clicked[bool].connect(self.on_addTask_clicked)
 
         QtCore.QMetaObject.connectSlotsByName(self.ui.centralwidget)
         #self.create_menus()
 
-    @QtCore.Slot()
-    def on_AddTaskButton_clicked(self):
-      print 'oi'
+        self.todoListWidget = TodoListWidget(self, self.ui.listWidget)
 
     @QtCore.Slot()
     def on_StartButton_clicked(self):
@@ -158,10 +200,9 @@ class MainWindow(QtGui.QMainWindow):
         else:
             changeActiveColor(self.ui.statusbar, QtGui.QColor(222,222,222))
 
-    def addTask(self):
+    def on_addTask_clicked(self):
       if self.ui.AddTaskEdit.text():
-        todoListWidget = TodoListWidget()
-        todoListWidget.newItem(True, self.ui.listWidget, self.ui.AddTaskEdit.text())
+        self.todoListWidget.newItem(self.ui.AddTaskEdit.text())
       else:
         self.ui.statusbar.showMessage("You must add a description to your task.", 3500)
 

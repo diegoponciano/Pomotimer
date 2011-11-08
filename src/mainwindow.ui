@@ -135,42 +135,6 @@ QPushButton:default {
      </rect>
     </property>
     <layout class="QGridLayout" name="StartGrid">
-     <item row="0" column="1">
-      <widget class="QPushButton" name="StartButton">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
-	border: 1px solid #8f8f91;
-	border-radius:5px;
-	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #4FE455, stop: 1 #12A719);
-	color:white;
-	min-width: 180px;
-	height:60px;
-	font-size:17px/20px;
-}
-QPushButton:hover {
-	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #3FF047, stop: 1 #15B91D);
-}</string>
-       </property>
-       <property name="text">
-        <string>start pomodoro</string>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>16</width>
-         <height>16</height>
-        </size>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="0">
       <spacer name="LeftSpacer">
        <property name="orientation">
@@ -196,6 +160,20 @@ QPushButton:hover {
         </size>
        </property>
       </spacer>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="TimerLabel">
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>25:00</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
@@ -315,9 +293,9 @@ QTabBar::tab:hover {
       <widget class="QListWidget" name="listWidget">
        <property name="geometry">
         <rect>
-         <x>140</x>
+         <x>130</x>
          <y>56</y>
-         <width>380</width>
+         <width>390</width>
          <height>195</height>
         </rect>
        </property>
