@@ -15,8 +15,11 @@ if src_dir not in sys.path:
 import mainwidget_test
 import todolist_test
 
+import config
+config.tomatoes_dir = os.path.join(path, "testdata")
+
 if __name__ == "__main__":
     suite = unittest.TestSuite()
-    suite.addTest(unittest.TestLoader().loadTestsFromTestCase(mainwidget_test.MainWidgetTest))
+    #suite.addTest(unittest.TestLoader().loadTestsFromTestCase(mainwidget_test.MainWidgetTest))
     suite.addTest(unittest.TestLoader().loadTestsFromTestCase(todolist_test.TodoListTest))
     unittest.TextTestRunner(verbosity=1).run(suite)
