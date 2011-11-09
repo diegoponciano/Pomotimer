@@ -9,6 +9,7 @@ from PySide import QtGui
 from PySide import QtDeclarative
 from pprint import pprint
 import os
+import todolist
 
 # Comment the line below if you don't want to use OpenGL for QML rendering or if it is not supported
 from PySide import QtOpenGL
@@ -45,29 +46,6 @@ class HoverOpacity(QtCore.QObject):
           effect.setOpacity(0.8)
           element.setGraphicsEffect(effect)
 
-class MainWidget(QtGui.QWidget):
-
-    def __init__(self, parent=None):
-        QtGui.QWidget.__init__(self, parent=parent)
-
-        QtGui.QFontDatabase.addApplicationFont("./PTS55F.ttf")
-
-        loader = QtUiTools.QUiLoader()
-        uifile_loc = "./mainwindow.ui"
-        uifile = QtCore.QFile(uifile_loc)
-        ui = loader.load(uifile)
-        ui.centralwidget
-        
-        self._layout = QtGui.QVBoxLayout()
-        self._layout.addWidget(ui)
-        self.setLayout(self._layout)
-
-        self.ui = self.children()[1]
-
-        self.ui.TasksVertical.parent().setGeometry(QtCore.QRect(0, 0, 370, 0))
-        self.ui.TaskListWidget.setMinimumSize(300, 0)
-        QtCore.QMetaObject.connectSlotsByName(self)
-
 class TodoListWidget(QtCore.QObject):
   def __init__(self, window, listWidget):
     QtCore.QObject.__init__(self)
@@ -78,6 +56,7 @@ class TodoListWidget(QtCore.QObject):
     self.item = None 
     self.pomotimer = None 
     self.start_event = self.on_start_clicked 
+    self.todolist = todolist.TodoList()
 
   def newItem(self, labelText):
 
