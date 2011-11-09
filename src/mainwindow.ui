@@ -87,7 +87,7 @@ QPushButton:default {
       <x>10</x>
       <y>0</y>
       <width>291</width>
-      <height>41</height>
+      <height>37</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="ButtonsGrid">
@@ -129,9 +129,9 @@ QPushButton:default {
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>56</y>
+      <y>46</y>
       <width>661</width>
-      <height>147</height>
+      <height>155</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="StartGrid">
@@ -182,9 +182,9 @@ QPushButton:default {
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>206</y>
+      <y>204</y>
       <width>661</width>
-      <height>265</height>
+      <height>267</height>
      </rect>
     </property>
     <property name="font">
@@ -200,9 +200,9 @@ QPushButton:default {
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>6</y>
+       <y>4</y>
        <width>661</width>
-       <height>295</height>
+       <height>297</height>
       </rect>
      </property>
      <property name="autoFillBackground">
@@ -295,9 +295,9 @@ QTabBar::tab:hover {
        <property name="geometry">
         <rect>
          <x>130</x>
-         <y>40</y>
+         <y>39</y>
          <width>390</width>
-         <height>223</height>
+         <height>201</height>
         </rect>
        </property>
        <property name="styleSheet">

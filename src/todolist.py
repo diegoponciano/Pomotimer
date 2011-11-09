@@ -19,18 +19,30 @@ class TodoList():
       if not os.path.exists(config.tomatoes_dir):
           os.path.os.mkdir(config.tomatoes_dir)
 
-      storage = FileStorage.FileStorage(config.tomatoes_data)
-      db = DB(storage)
-      conn = db.open()
-      self.dbroot = conn.root()
+      self.store = FileStorage.FileStorage(config.tomatoes_data)
+      self.db = DB(self.store)
+      self.conn = self.db.open()
+      self.dbroot = self.conn.root()
+
       if not self.dbroot.has_key('tasks'):
           self.dbroot['tasks'] = OOBTree()
       self.tasks = self.dbroot['tasks']
+  
+  def close(self):
+      try:
+          self.conn.close()
+          self.db.close()
+          self.store.close()
+          return True
+      except:
+          return False
 
   def addItem(self, task):
       if (len(self.tasks) > 0):
           last_id = self.tasks.maxKey()
           new_id = last_id+1 
+      else:
+        new_id = 1
 
       new_task = TodoItem()
       new_task.id = new_id
