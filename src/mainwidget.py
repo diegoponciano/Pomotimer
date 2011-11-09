@@ -57,14 +57,22 @@ class TodoListWidget(QtCore.QObject):
     self.pomotimer = None 
     self.start_event = self.on_start_clicked 
     self.todolist = todolist.TodoList()
+    self.loadItems()
 
   def dispose(self):
     self.todolist.close()
+  
+  def loadItems(self):
+    for item in list(self.todolist.tasks.values()):
+      self.appendItem(item.description, item.id)
 
-  def newItem(self, labelText):
-    new_item = self.todolist.addItem(labelText)
+  def newTask(self, description):
+    new_task = self.todolist.addItem(description)
+    self.appendItem(description, new_task.id)
 
+  def appendItem(self, labelText, task_id):
     item = QtGui.QListWidgetItem()
+    item.id = task_id
     item.setSizeHint(QtCore.QSize(378,22))
     self.tasks.addItem(item)
     row = str(self.tasks.indexFromItem(item).row())
@@ -109,9 +117,12 @@ class TodoListWidget(QtCore.QObject):
     new_taskRemoveButton.clicked[bool].connect(lambda a: self.removeItem(a, item))
     new_taskStartButton.clicked[bool].connect(lambda a: self.start_event(a, item))
 
+    return item
+
   def removeItem(self, pressed, item):
     row = self.tasks.indexFromItem(item).row()
     self.tasks.takeItem(row)
+    self.todolist.removeItem(item.id)
 
   def on_start_clicked(self, pressed, item):
     self.row = self.tasks.indexFromItem(item).row()
@@ -283,7 +294,7 @@ class MainWindow(QtGui.QMainWindow):
 
     def on_addTask_clicked(self):
       if self.ui.AddTaskEdit.text():
-        self.todoListWidget.newItem(self.ui.AddTaskEdit.text())
+        self.todoListWidget.newTask(self.ui.AddTaskEdit.text())
       else:
         self.ui.statusbar.showMessage("You must add a description to your task.", 3500)
 
