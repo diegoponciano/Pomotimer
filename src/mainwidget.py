@@ -59,6 +59,10 @@ class TodoListWidget(QtCore.QObject):
     self.todolist = todolist.TodoList()
 
   def newItem(self, labelText):
+    
+    todoitem = todolist.TodoItem()
+    todoitem.description = labelText
+
 
     item = QtGui.QListWidgetItem()
     item.setSizeHint(QtCore.QSize(378,22))
