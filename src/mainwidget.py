@@ -58,11 +58,11 @@ class TodoListWidget(QtCore.QObject):
     self.start_event = self.on_start_clicked 
     self.todolist = todolist.TodoList()
 
-  def newItem(self, labelText):
-    
-    todoitem = todolist.TodoItem()
-    todoitem.description = labelText
+  def dispose(self):
+    self.todolist.close()
 
+  def newItem(self, labelText):
+    new_item = self.todolist.addItem(labelText)
 
     item = QtGui.QListWidgetItem()
     item.setSizeHint(QtCore.QSize(378,22))
@@ -271,6 +271,9 @@ class MainWindow(QtGui.QMainWindow):
         #self.create_menus()
 
         self.todoListWidget = TodoListWidget(self.ui, self.ui.listWidget)
+
+    def dispose(self):
+      self.todoListWidget.dispose()
 
     def on_statusbar_messageChanged(self, text):
         if text:
