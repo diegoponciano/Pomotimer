@@ -1,18 +1,12 @@
 #!/usr/bin/python
 
 import sys
-import pprint
 
 from PySide import QtCore
 from PySide import QtUiTools
 from PySide import QtGui
-from PySide import QtDeclarative
-from pprint import pprint
 import os
 import todolist
-
-# Comment the line below if you don't want to use OpenGL for QML rendering or if it is not supported
-from PySide import QtOpenGL
 
 def changeActiveColor(obj, color):
     palette = QtGui.QPalette()
@@ -99,12 +93,12 @@ class TodoListWidget(QtCore.QObject):
     new_taskStartButton.setGeometry(QtCore.QRect(5, -2, 24, 26))
 
     icon1 = QtGui.QIcon()
-    icon1.addPixmap(QtGui.QPixmap("delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+    icon1.addPixmap(QtGui.QPixmap("assets/delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
     new_taskRemoveButton.setIcon(icon1)
     new_taskRemoveButton.setObjectName("taskRemoveButton_" + row)
 
     icon2 = QtGui.QIcon()
-    icon2.addPixmap(QtGui.QPixmap("start.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+    icon2.addPixmap(QtGui.QPixmap("assets/start.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
     new_taskStartButton.setIcon(icon2)
     new_taskStartButton.setObjectName("taskStartButton_" + row)
 
@@ -132,7 +126,7 @@ class TodoListWidget(QtCore.QObject):
 
     startBtn = self.item.findChild(QtGui.QToolButton, "taskStartButton_"+str(self.row))
     icon = QtGui.QIcon()
-    icon.addPixmap(QtGui.QPixmap("stop.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+    icon.addPixmap(QtGui.QPixmap("assets/stop.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
     startBtn.setIcon(icon)
     self.start_event = self.on_stop_clicked 
 
@@ -144,7 +138,7 @@ class TodoListWidget(QtCore.QObject):
     if reply == QtGui.QMessageBox.Yes:
       startBtn = self.item.findChild(QtGui.QToolButton, "taskStartButton_"+str(self.row))
       icon = QtGui.QIcon()
-      icon.addPixmap(QtGui.QPixmap("start.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+      icon.addPixmap(QtGui.QPixmap("assets/start.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
       startBtn.setIcon(icon)
       self.enableItems()
       self.start_event = self.on_start_clicked 
@@ -267,7 +261,7 @@ class MainWindow(QtGui.QMainWindow):
     def __init__(self, parent=None):
         QtGui.QMainWindow.__init__(self, parent=parent)
 
-        QtGui.QFontDatabase.addApplicationFont("./PTS55F.ttf")
+        QtGui.QFontDatabase.addApplicationFont("assets/PTS55F.ttf")
 
         loader = QtUiTools.QUiLoader()
         uifile = QtCore.QFile("./mainwindow.ui")

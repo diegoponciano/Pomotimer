@@ -14,7 +14,7 @@ def main():
     window.show()
     window.center()
 
-    icon = QtGui.QIcon('Tomato.png')
+    icon = QtGui.QIcon('assets/Tomato.png')
     window.setWindowIcon(icon)
     window.setWindowIconText('Pomotimer')
     window.setWindowTitle('Pomotimer')
