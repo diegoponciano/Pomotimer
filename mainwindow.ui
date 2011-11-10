@@ -14,10 +14,18 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Pomodoro</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>Tomato.ico</normaloff>Tomato.ico</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">#ShortBreakButton,#LongBreakButton,#PomodoroButton {
+   <string notr="true"/>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">#ShortBreakButton,#LongBreakButton,#PomodoroButton {
 	border: 1px solid #8f8f91;
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FBFBFB, stop: 1 #E0E0E0);
 	min-width: 80px;
@@ -38,18 +46,7 @@
 	border-bottom-right-radius: 6px;
 	border-left: 0px;
 }
-#StartButton {
-	border: 1px solid #8f8f91;
-	border-radius:5px;
-	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #4FE455, stop: 1 #12A719);
-	color:white;
-	min-width: 180px;
-	height:60px;
-	font-size:17px/20px;
-}
-#StartButton:hover {
-	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #3FF047, stop: 1 #15B91D);
-}
+
 #AddTaskEdit {
 	height:20px;
 	margin:0;
@@ -87,15 +84,14 @@ QPushButton:default {
 }
 
 </string>
-  </property>
-  <widget class="QWidget" name="centralwidget">
+   </property>
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>0</y>
       <width>291</width>
-      <height>41</height>
+      <height>37</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="ButtonsGrid">
@@ -137,34 +133,12 @@ QPushButton:default {
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>50</y>
+      <y>46</y>
       <width>661</width>
-      <height>111</height>
+      <height>155</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="StartGrid">
-     <item row="0" column="1">
-      <widget class="QPushButton" name="StartButton">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>start pomodoro</string>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>16</width>
-         <height>16</height>
-        </size>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="0">
       <spacer name="LeftSpacer">
        <property name="orientation">
@@ -191,15 +165,31 @@ QPushButton:default {
        </property>
       </spacer>
      </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="TimerLabel">
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+	color: black;
+	font-size: 120pt;
+	font-family: &quot;PT Sans&quot;;
+	font-weight: bold;
+	padding:0;
+}</string>
+       </property>
+       <property name="text">
+        <string>00:00</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
    <widget class="QWidget" name="SummaryWidget" native="true">
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>170</y>
+      <y>204</y>
       <width>661</width>
-      <height>301</height>
+      <height>267</height>
      </rect>
     </property>
     <property name="font">
@@ -215,18 +205,16 @@ QPushButton:default {
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>10</y>
+       <y>4</y>
        <width>661</width>
-       <height>291</height>
+       <height>297</height>
       </rect>
      </property>
      <property name="autoFillBackground">
       <bool>false</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true">QTabWidget::pane { /* The tab widget frame */
-     /*border-top: 2px solid #C2C7CB;*/
-	/*background-color:#F6F6F6;*/
+      <string notr="true">QTabWidget::pane { 
 	border:0;
      position: absolute;
      top: -0.5em;
@@ -239,18 +227,12 @@ QTabWidget::tab-bar {
     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
                                  stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
                                  stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
-     /*border: 2px solid #C4C4C3;
-     border-bottom-color: #C2C7CB; /* same as the pane color */
-     /*border-top-left-radius: 4px;
-     border-top-right-radius: 4px;*/
 	background-color:#F6F6F6;
      min-width: 12ex;
-     /*padding: 2px;*/
 	padding:0;
 	color: #AAA;
 	font-size: 16px;
 	font-family: 'PT Sans';
-	/*font-weight:bold;*/
  }
 QTabBar::tab:selected {
 	color: #111;
@@ -258,18 +240,13 @@ QTabBar::tab:selected {
 	font-family: 'PT Sans';
 	font-weight: bold;
 }
-QTabBar::tab:selected, QTabBar::tab:hover {
-     /*background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                 stop: 0 #fafafa, stop: 0.4 #f4f4f4,
-                                 stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);*/
- }
 QTabBar::tab:hover {
 	color:#111;
 }
- QTabBar::tab:selected {
-     /*border-color: #9B9B9B;
-     border-bottom-color: #C2C7CB; /* same as pane color */
- }</string>
+QLabel {
+	font-size: 16px;
+	font-family: 'PT Sans';
+}</string>
      </property>
      <property name="currentIndex">
       <number>0</number>
@@ -282,9 +259,9 @@ QTabBar::tab:hover {
        <property name="geometry">
         <rect>
          <x>140</x>
-         <y>10</y>
+         <y>8</y>
          <width>371</width>
-         <height>46</height>
+         <height>31</height>
         </rect>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout">
@@ -306,31 +283,106 @@ QTabBar::tab:hover {
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="verticalLayoutWidget">
+      <widget class="QListWidget" name="listWidget">
        <property name="geometry">
         <rect>
-         <x>140</x>
-         <y>54</y>
-         <width>371</width>
-         <height>16</height>
+         <x>130</x>
+         <y>39</y>
+         <width>390</width>
+         <height>201</height>
         </rect>
        </property>
-       <layout class="QVBoxLayout" name="TasksVertical">
-        <property name="spacing">
-         <number>2</number>
-        </property>
-       </layout>
+       <property name="styleSheet">
+        <string notr="true">QListView { background-color: #f6f6f6; }
+QListView::item { background-color: #fff; border:none; }
+QListView::item:selected { border: 1px solid #6a6ea9; }
+QListView::item QWidget { border:none; } 
+QListView::item QLabel { border:none; } 
+QListView::item QToolButton { background-color: none;border:none; }
+QScrollBar:vertical {
+     border: 2px solid green;
+     background: cyan;
+     width: 10px;
+     margin: 13px 0px 13px 0px;
+ }
+
+ QScrollBar::handle:vertical {
+     background: gray;
+     min-height: 16px;
+ }
+
+QScrollBar::add-line:vertical {
+    border: 2px solid green;
+	background: #32CC99;
+     height: 11px;
+     subcontrol-position: bottom;
+     subcontrol-origin: margin;
+ }
+
+ QScrollBar::sub-line:vertical {
+     border: 2px solid green;
+     background: #32CC99;
+     height: 11px;
+     subcontrol-position: top;
+     subcontrol-origin: margin;
+ }
+
+ QScrollBar:up-arrow:vertical, QScrollBar::down-arrow:vertical {
+     width: 3px;
+     height: 3px;
+     background: white;
+ }
+
+ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+     background: none;
+ }</string>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
+       </property>
+       <property name="horizontalScrollBarPolicy">
+        <enum>Qt::ScrollBarAlwaysOff</enum>
+       </property>
+       <property name="spacing">
+        <number>1</number>
+       </property>
       </widget>
      </widget>
      <widget class="QWidget" name="HistoryTab">
       <attribute name="title">
        <string>History</string>
       </attribute>
+      <widget class="QLabel" name="label">
+       <property name="geometry">
+        <rect>
+         <x>188</x>
+         <y>38</y>
+         <width>185</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Coming soon...</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QWidget" name="StatsTab">
       <attribute name="title">
        <string>Stats</string>
       </attribute>
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>188</x>
+         <y>38</y>
+         <width>185</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Coming soon...</string>
+       </property>
+      </widget>
      </widget>
     </widget>
    </widget>

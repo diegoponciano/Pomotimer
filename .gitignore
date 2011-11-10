@@ -16,6 +16,7 @@ bin
 var
 sdist
 develop-eggs
+test/data
 .installed.cfg
 
 # Installer logs

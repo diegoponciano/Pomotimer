@@ -6,7 +6,7 @@ import unittest
 import pprint
 
 path = os.path.abspath(os.path.dirname(__file__))
-src_dir = os.path.join(path,os.pardir, 'src')
+src_dir = os.path.join(path, os.pardir)
 os.chdir(src_dir)
 
 if src_dir not in sys.path:
@@ -14,6 +14,10 @@ if src_dir not in sys.path:
 
 import mainwidget_test
 import todolist_test
+
+import config
+config.tomatoes_dir = os.path.join(path, "data")
+config.tomatoes_data = os.path.join(config.tomatoes_dir, "data.fs")
 
 if __name__ == "__main__":
     suite = unittest.TestSuite()

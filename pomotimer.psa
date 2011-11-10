@@ -1,0 +1,11 @@
+[Project]
+category = Development
+maintainer = Diego
+appname = PySide app
+section = development
+pyversion = 2.7
+project = pomotimer
+email = email@example.com
+desc = A PySide example
+template = ubuntu-qtgui
+
