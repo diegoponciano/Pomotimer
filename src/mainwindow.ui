@@ -14,7 +14,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Pomodoro</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>Tomato.ico</normaloff>Tomato.ico</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -165,10 +169,11 @@ QPushButton:default {
       <widget class="QLabel" name="TimerLabel">
        <property name="styleSheet">
         <string notr="true">QLabel {
-   color: black;
-   font-size: 120pt;
-   font-family: &quot;PT Sans&quot;;
-   font-weight: bold;
+	color: black;
+	font-size: 120pt;
+	font-family: &quot;PT Sans&quot;;
+	font-weight: bold;
+	padding:0;
 }</string>
        </property>
        <property name="text">
