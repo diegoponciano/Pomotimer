@@ -15,7 +15,7 @@ if src_dir not in sys.path:
 import mainwidget_test
 import todolist_test
 
-import config
+from pomolib import config
 config.tomatoes_dir = os.path.join(path, "data")
 config.tomatoes_data = os.path.join(config.tomatoes_dir, "data.fs")
 

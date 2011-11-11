@@ -8,7 +8,7 @@ from PySide.QtTest import QTest
 from PySide.QtCore import Qt
 from PySide.QtCore import QCoreApplication
 
-import mainwidget
+from pomolib import mainwidget
 
 class MainWidgetTest(unittest.TestCase):
     '''Test the pomodoro GUI'''

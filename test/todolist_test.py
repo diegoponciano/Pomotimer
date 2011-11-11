@@ -4,7 +4,7 @@ import os
 import sys
 import unittest
 
-import todolist
+from pomolib import todolist
 
 class TodoListTest(unittest.TestCase):
     '''Test the pomodoro list'''

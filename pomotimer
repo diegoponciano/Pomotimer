@@ -4,7 +4,7 @@ import sys
 
 from PySide import QtGui
 
-import mainwidget
+from pomolib import mainwidget
 
 def main():
 
