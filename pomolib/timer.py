@@ -1,3 +1,5 @@
+# based on https://gist.github.com/792308
+
 from PySide import QtCore
 
 normal_style = """
@@ -25,22 +27,13 @@ negative_style = """
    font-weight: bold;
 }"""
 
-standby_style = """
- QLabel {
-   color: green;
-   background-color: black;
-   font-size: 80pt;
-   font-family: "PT Sans";
-   font-weight: bold;
-}"""
-
 class PomodoroTimer(object):
   def __init__(self, label, totalTime, callback):
         self.label = label
         self.totalTime = totalTime
         self.callback = callback 
         self.remainingTime = totalTime
-        self.current_state = self.standingby
+        self.current_state = self.stopped
         self.current_state()
         self.timer = QtCore.QTimer(interval=1000) # miliseconds
         self.timer.timeout.connect(self.on_every_second)
@@ -72,12 +65,7 @@ class PomodoroTimer(object):
         self.current_state = self.standingby
         self.current_state()
 
-
     # States:
-  def standingby(self):
-        self.label.setStyleSheet(standby_style)
-        self.label.setText("TEDxSkopje")
-
   def stopped(self):
         self.label.setStyleSheet(normal_style)
         self.label.setText("00:00")
@@ -92,5 +80,3 @@ class PomodoroTimer(object):
         else:
             self.label.setStyleSheet(normal_style)
             self.label.setText("%02d:%02d" % divmod(self.remainingTime, 60))
-
-
