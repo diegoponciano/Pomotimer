@@ -19,6 +19,7 @@ sdist
 develop-eggs
 test/data
 .installed.cfg
+build-deb.log
 
 # Installer logs
 pip-log.txt
