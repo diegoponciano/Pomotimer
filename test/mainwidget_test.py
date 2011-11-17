@@ -20,7 +20,7 @@ class MainWidgetTest(unittest.TestCase):
             cls.app = QCoreApplication.instance()
 
         cls.window = mainwidget.MainWindow()
-        cls.form = cls.window.centralWidget()
+        cls.form = cls.window.ui
 
     @classmethod
     def tearDownClass(cls):

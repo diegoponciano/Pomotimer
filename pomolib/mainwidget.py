@@ -5,16 +5,19 @@ import sys
 from PySide import QtCore
 from PySide import QtUiTools
 from PySide import QtGui
+from timer import PomodoroTimer
 import os
 import todolist
+import config
+import ui_mainwindow
 
 def changeActiveColor(obj, color):
     palette = QtGui.QPalette()
     brush = QtGui.QBrush(color)
     brush.setStyle(QtCore.Qt.SolidPattern)
     palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Window, brush)
-    obj.setPalette(palette)
     obj.setAutoFillBackground(True)
+    obj.setPalette(palette)
 
 class HoverOpacity(QtCore.QObject):
     def eventFilter(self, obj, event):
@@ -93,12 +96,12 @@ class TodoListWidget(QtCore.QObject):
     new_taskStartButton.setGeometry(QtCore.QRect(5, -2, 24, 26))
 
     icon1 = QtGui.QIcon()
-    icon1.addPixmap(QtGui.QPixmap("assets/delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+    icon1.addPixmap(QtGui.QPixmap(os.path.join(config.assets_dir, 'delete.png')), QtGui.QIcon.Normal, QtGui.QIcon.Off)
     new_taskRemoveButton.setIcon(icon1)
     new_taskRemoveButton.setObjectName("taskRemoveButton_" + row)
 
     icon2 = QtGui.QIcon()
-    icon2.addPixmap(QtGui.QPixmap("assets/start.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+    icon2.addPixmap(QtGui.QPixmap(os.path.join(config.assets_dir, 'start.png')), QtGui.QIcon.Normal, QtGui.QIcon.Off)
     new_taskStartButton.setIcon(icon2)
     new_taskStartButton.setObjectName("taskStartButton_" + row)
 
@@ -126,11 +129,11 @@ class TodoListWidget(QtCore.QObject):
 
     startBtn = self.item.findChild(QtGui.QToolButton, "taskStartButton_"+str(self.row))
     icon = QtGui.QIcon()
-    icon.addPixmap(QtGui.QPixmap("assets/stop.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+    icon.addPixmap(QtGui.QPixmap(os.path.join(config.assets_dir, 'stop.png')), QtGui.QIcon.Normal, QtGui.QIcon.Off)
     startBtn.setIcon(icon)
     self.start_event = self.on_stop_clicked 
 
-    self.pomotimer = PomoTimer(self.window.TimerLabel, 25*60, self.tomatoFinished)
+    self.pomotimer = PomodoroTimer(self.window.ui.TimerLabel, 25*60, self.tomatoFinished)
     self.pomotimer.start()
   
   def on_stop_clicked(self, pressed, item):
@@ -138,7 +141,7 @@ class TodoListWidget(QtCore.QObject):
     if reply == QtGui.QMessageBox.Yes:
       startBtn = self.item.findChild(QtGui.QToolButton, "taskStartButton_"+str(self.row))
       icon = QtGui.QIcon()
-      icon.addPixmap(QtGui.QPixmap("assets/start.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+      icon.addPixmap(QtGui.QPixmap(os.path.join(config.assets_dir, 'start.png')), QtGui.QIcon.Normal, QtGui.QIcon.Off)
       startBtn.setIcon(icon)
       self.enableItems()
       self.start_event = self.on_start_clicked 
@@ -162,112 +165,19 @@ class TodoListWidget(QtCore.QObject):
   def tomatoFinished(self):
     pass
 
-normal_style = """
- QLabel {
-   color: black;
-   font-size: 120pt;
-   font-family: "PT Sans";
-   font-weight: bold;
-}"""
-
-warning_style = """
- QLabel {
-   color: red;
-   font-size: 120pt;
-   font-family: "PT Sans";
-   font-weight: bold;
-}"""
-
-negative_style = """
- QLabel {
-   color: black;
-   background-color: red;
-   font-size: 120pt;
-   font-family: "PT Sans";
-   font-weight: bold;
-}"""
-
-standby_style = """
- QLabel {
-   color: green;
-   background-color: black;
-   font-size: 80pt;
-   font-family: "PT Sans";
-   font-weight: bold;
-}"""
-
-class PomoTimer(object):
-  def __init__(self, label, totalTime, callback):
-        self.label = label
-        self.totalTime = totalTime
-        self.callback = callback 
-        self.remainingTime = totalTime
-        self.current_state = self.standingby
-        self.current_state()
-        self.timer = QtCore.QTimer(interval=1000) # miliseconds
-        self.timer.timeout.connect(self.on_every_second)
-
-    # Event methods:
-  def on_every_second(self):
-        self.remainingTime -= 1
-        self.current_state()
-
-    # Methods:
-  def start(self):
-        if self.current_state not in [self.standingby, self.stopped]:
-            return
-        self.remainingTime = self.totalTime
-        self.current_state = self.countdown
-        self.current_state()
-        self.timer.start()
-
-  def stop(self):
-        if self.current_state in [self.standingby, self.stopped]:
-            return
-        self.timer.stop()
-        self.current_state = self.stopped
-        self.current_state()
-        self.callback()
-
-  def standby(self):
-        self.timer.stop()
-        self.current_state = self.standingby
-        self.current_state()
-
-
-    # States:
-  def standingby(self):
-        self.label.setStyleSheet(standby_style)
-        self.label.setText("TEDxSkopje")
-
-  def stopped(self):
-        self.label.setStyleSheet(normal_style)
-        self.label.setText("00:00")
-
-  def countdown(self):
-        if self.remainingTime < 0:
-            self.label.setStyleSheet(negative_style)
-            self.label.setText("%02d:%02d" % divmod(abs(self.remainingTime), 60))
-        elif self.remainingTime < 60:
-            self.label.setStyleSheet(warning_style)
-            self.label.setText("%02d:%02d" % divmod(self.remainingTime, 60))
-        else:
-            self.label.setStyleSheet(normal_style)
-            self.label.setText("%02d:%02d" % divmod(self.remainingTime, 60))
-
 
 class MainWindow(QtGui.QMainWindow):
 
     def __init__(self, parent=None):
         QtGui.QMainWindow.__init__(self, parent=parent)
 
-        QtGui.QFontDatabase.addApplicationFont("assets/PTS55F.ttf")
+        QtGui.QFontDatabase.addApplicationFont(os.path.join(config.assets_dir, 'PTS55F.ttf'))
 
-        loader = QtUiTools.QUiLoader()
-        uifile = QtCore.QFile("./mainwindow.ui")
-        self.ui = loader.load(uifile)
+        self.ui = ui_mainwindow.Ui_MainWindow()
+        self.ui.setupUi(self)
+
         self.resize(670, 480)
-        self.setCentralWidget(self.ui)
+        self.setCentralWidget(self.ui.centralwidget)
 
         self.ui.AddTaskButton.clicked[bool].connect(self.on_addTask_clicked)
         self.ui.statusbar.messageChanged.connect(self.on_statusbar_messageChanged)
@@ -275,7 +185,8 @@ class MainWindow(QtGui.QMainWindow):
         QtCore.QMetaObject.connectSlotsByName(self.ui.centralwidget)
         #self.create_menus()
 
-        self.todoListWidget = TodoListWidget(self.ui, self.ui.listWidget)
+        self.todoListWidget = TodoListWidget(self, self.ui.listWidget)
+        #changeActiveColor(self.ui.SummaryTabs, QtGui.QColor(246,246,246))
 
     def dispose(self):
       self.todoListWidget.dispose()
