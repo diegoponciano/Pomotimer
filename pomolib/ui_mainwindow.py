@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'pomolib/mainwindow.ui'
 #
-# Created: Thu Nov 17 01:53:08 2011
+# Created: Thu Nov 17 03:11:08 2011
 #      by: pyside-uic 0.2.13 running on PySide 1.0.8
 #
 # WARNING! All changes made in this file will be lost!
@@ -99,7 +99,7 @@ class Ui_MainWindow(object):
         self.LongBreakButton.setObjectName("LongBreakButton")
         self.ButtonsGrid.addWidget(self.LongBreakButton, 0, 2, 1, 1)
         self.gridLayoutWidget_2 = QtGui.QWidget(self.centralwidget)
-        self.gridLayoutWidget_2.setGeometry(QtCore.QRect(0, 46, 661, 159))
+        self.gridLayoutWidget_2.setGeometry(QtCore.QRect(0, 46, 661, 161))
         self.gridLayoutWidget_2.setObjectName("gridLayoutWidget_2")
         self.StartGrid = QtGui.QGridLayout(self.gridLayoutWidget_2)
         self.StartGrid.setContentsMargins(0, 0, 0, 0)
@@ -111,7 +111,7 @@ class Ui_MainWindow(object):
         self.TimerLabel = QtGui.QLabel(self.gridLayoutWidget_2)
         self.TimerLabel.setStyleSheet("QLabel {\n"
 "    color: black;\n"
-"    font-size: 100pt;\n"
+"    font-size: 120pt;\n"
 "    font-family: \"PT Sans\";\n"
 "    font-weight: bold;\n"
 "    padding:0;\n"
@@ -124,14 +124,14 @@ class Ui_MainWindow(object):
         font.setFamily("PT Sans")
         font.setPointSize(14)
         self.SummaryFrame.setFont(font)
-        self.SummaryFrame.setStyleSheet("#SummaryWidget {\n"
-"    background-color:#F6F6F6;\n"
+        self.SummaryFrame.setStyleSheet("#SummaryTabs {\n"
+"    background-color:rgb(246, 246, 246);\n"
 "    border-top: 3px solid #C2C7CB;\n"
-"    top:0.5em;\n"
+"\n"
 "}\n"
 "QTabWidget {\n"
 "    background-color:#F6F6F6;\n"
-"    top:0.5em;\n"
+"\n"
 "}\n"
 "QTabWidget::pane { \n"
 "    border:0;\n"
@@ -259,7 +259,7 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "Pomodoro", None, QtGui.QApplication.UnicodeUTF8))
+        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "Pomotimer", None, QtGui.QApplication.UnicodeUTF8))
         self.PomodoroButton.setText(QtGui.QApplication.translate("MainWindow", "pomodoro", None, QtGui.QApplication.UnicodeUTF8))
         self.ShortBreakButton.setText(QtGui.QApplication.translate("MainWindow", "short break", None, QtGui.QApplication.UnicodeUTF8))
         self.LongBreakButton.setText(QtGui.QApplication.translate("MainWindow", "long break", None, QtGui.QApplication.UnicodeUTF8))

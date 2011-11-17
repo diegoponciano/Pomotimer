@@ -96,13 +96,11 @@ class TodoListWidget(QtCore.QObject):
 
     icon1 = QtGui.QIcon()
     icon1.addPixmap(QtGui.QPixmap(os.path.join(config.assets_dir, 'delete.png')), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-    print os.path.join(config.assets_dir, 'delete.png')
     new_taskRemoveButton.setIcon(icon1)
     new_taskRemoveButton.setObjectName("taskRemoveButton_" + row)
 
     icon2 = QtGui.QIcon()
     icon2.addPixmap(QtGui.QPixmap(os.path.join(config.assets_dir, 'start.png')), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-    print os.path.join(config.assets_dir, 'start.png')
     new_taskStartButton.setIcon(icon2)
     new_taskStartButton.setObjectName("taskStartButton_" + row)
 

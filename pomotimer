@@ -1,10 +1,12 @@
 #!/usr/bin/python
 
 import sys
+import os
 
 from PySide import QtGui
 
 from pomolib import mainwidget
+from pomolib import config
 
 def main():
 
@@ -14,7 +16,7 @@ def main():
     window.show()
     window.center()
 
-    icon = QtGui.QIcon('assets/Tomato.png')
+    icon = QtGui.QIcon(os.path.join(config.assets_dir, 'Tomato.png'))
     window.setWindowIcon(icon)
     window.setWindowIconText('Pomotimer')
     window.setWindowTitle('Pomotimer')

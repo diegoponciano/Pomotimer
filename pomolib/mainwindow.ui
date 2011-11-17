@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Pomodoro</string>
+   <string>Pomotimer</string>
   </property>
   <property name="windowIcon">
    <iconset>
@@ -135,7 +135,7 @@ QPushButton:default {
       <x>0</x>
       <y>46</y>
       <width>661</width>
-      <height>159</height>
+      <height>161</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="StartGrid">
@@ -170,7 +170,7 @@ QPushButton:default {
        <property name="styleSheet">
         <string notr="true">QLabel {
 	color: black;
-	font-size: 100pt;
+	font-size: 120pt;
 	font-family: &quot;PT Sans&quot;;
 	font-weight: bold;
 	padding:0;
