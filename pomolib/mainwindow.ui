@@ -135,7 +135,7 @@ QPushButton:default {
       <x>0</x>
       <y>46</y>
       <width>661</width>
-      <height>155</height>
+      <height>159</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="StartGrid">
@@ -170,7 +170,7 @@ QPushButton:default {
        <property name="styleSheet">
         <string notr="true">QLabel {
 	color: black;
-	font-size: 120pt;
+	font-size: 100pt;
 	font-family: &quot;PT Sans&quot;;
 	font-weight: bold;
 	padding:0;
@@ -183,12 +183,12 @@ QPushButton:default {
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="SummaryWidget" native="true">
+   <widget class="QFrame" name="SummaryFrame">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>204</y>
-      <width>661</width>
+      <width>669</width>
       <height>267</height>
      </rect>
     </property>
@@ -199,14 +199,50 @@ QPushButton:default {
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true"/>
+     <string notr="true">#SummaryTabs {
+	background-color:rgb(246, 246, 246);
+	border-top: 3px solid #C2C7CB;
+
+}
+QTabWidget {
+	background-color:#F6F6F6;
+
+}
+QTabWidget::pane { 
+	border:0;
+	position: absolute;
+	/*top: -0.5em;*/
+	background-color:#F6F6F6;
+}
+QTabWidget::tab-bar { alignment: center; }
+QTabBar::tab {
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
+                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
+	background-color:#F6F6F6;
+	min-width: 12ex;
+	padding:0;
+	color: #AAA;
+	font-size: 16px;
+	font-family: 'PT Sans';
+}
+
+QTabBar::tab:selected {
+	color: #111;
+	font-size: 16px;
+	font-family: 'PT Sans';
+	font-weight: bold;
+}
+
+QTabBar::tab:hover { color:#111; }
+QLabel { font-size: 16px; font-family: 'PT Sans'; }</string>
     </property>
     <widget class="QTabWidget" name="SummaryTabs">
      <property name="geometry">
       <rect>
        <x>0</x>
        <y>4</y>
-       <width>661</width>
+       <width>671</width>
        <height>297</height>
       </rect>
      </property>
@@ -214,39 +250,7 @@ QPushButton:default {
       <bool>false</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true">QTabWidget::pane { 
-	border:0;
-     position: absolute;
-     top: -0.5em;
- }
-
-QTabWidget::tab-bar {
-     alignment: center;
- }
-  QTabBar::tab {
-    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
-                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
-	background-color:#F6F6F6;
-     min-width: 12ex;
-	padding:0;
-	color: #AAA;
-	font-size: 16px;
-	font-family: 'PT Sans';
- }
-QTabBar::tab:selected {
-	color: #111;
-	font-size: 16px;
-	font-family: 'PT Sans';
-	font-weight: bold;
-}
-QTabBar::tab:hover {
-	color:#111;
-}
-QLabel {
-	font-size: 16px;
-	font-family: 'PT Sans';
-}</string>
+      <string notr="true"/>
      </property>
      <property name="currentIndex">
       <number>0</number>

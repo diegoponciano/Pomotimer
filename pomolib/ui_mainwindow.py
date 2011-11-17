@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'pomolib/mainwindow.ui'
 #
-# Created: Sun Nov 13 02:06:14 2011
+# Created: Thu Nov 17 01:53:08 2011
 #      by: pyside-uic 0.2.13 running on PySide 1.0.8
 #
 # WARNING! All changes made in this file will be lost!
@@ -99,7 +99,7 @@ class Ui_MainWindow(object):
         self.LongBreakButton.setObjectName("LongBreakButton")
         self.ButtonsGrid.addWidget(self.LongBreakButton, 0, 2, 1, 1)
         self.gridLayoutWidget_2 = QtGui.QWidget(self.centralwidget)
-        self.gridLayoutWidget_2.setGeometry(QtCore.QRect(0, 46, 661, 155))
+        self.gridLayoutWidget_2.setGeometry(QtCore.QRect(0, 46, 661, 159))
         self.gridLayoutWidget_2.setObjectName("gridLayoutWidget_2")
         self.StartGrid = QtGui.QGridLayout(self.gridLayoutWidget_2)
         self.StartGrid.setContentsMargins(0, 0, 0, 0)
@@ -111,57 +111,61 @@ class Ui_MainWindow(object):
         self.TimerLabel = QtGui.QLabel(self.gridLayoutWidget_2)
         self.TimerLabel.setStyleSheet("QLabel {\n"
 "    color: black;\n"
-"    font-size: 120pt;\n"
+"    font-size: 100pt;\n"
 "    font-family: \"PT Sans\";\n"
 "    font-weight: bold;\n"
 "    padding:0;\n"
 "}")
         self.TimerLabel.setObjectName("TimerLabel")
         self.StartGrid.addWidget(self.TimerLabel, 0, 1, 1, 1)
-        self.SummaryWidget = QtGui.QWidget(self.centralwidget)
-        self.SummaryWidget.setGeometry(QtCore.QRect(0, 204, 661, 267))
+        self.SummaryFrame = QtGui.QFrame(self.centralwidget)
+        self.SummaryFrame.setGeometry(QtCore.QRect(0, 204, 669, 267))
         font = QtGui.QFont()
         font.setFamily("PT Sans")
         font.setPointSize(14)
-        self.SummaryWidget.setFont(font)
-        self.SummaryWidget.setStyleSheet("")
-        self.SummaryWidget.setObjectName("SummaryWidget")
-        self.SummaryTabs = QtGui.QTabWidget(self.SummaryWidget)
-        self.SummaryTabs.setGeometry(QtCore.QRect(0, 4, 661, 297))
-        self.SummaryTabs.setAutoFillBackground(False)
-        self.SummaryTabs.setStyleSheet("QTabWidget::pane { \n"
+        self.SummaryFrame.setFont(font)
+        self.SummaryFrame.setStyleSheet("#SummaryWidget {\n"
+"    background-color:#F6F6F6;\n"
+"    border-top: 3px solid #C2C7CB;\n"
+"    top:0.5em;\n"
+"}\n"
+"QTabWidget {\n"
+"    background-color:#F6F6F6;\n"
+"    top:0.5em;\n"
+"}\n"
+"QTabWidget::pane { \n"
 "    border:0;\n"
-"     position: absolute;\n"
-"     top: -0.5em;\n"
-" }\n"
-"\n"
-"QTabWidget::tab-bar {\n"
-"     alignment: center;\n"
-" }\n"
-"  QTabBar::tab {\n"
+"    position: absolute;\n"
+"    /*top: -0.5em;*/\n"
+"    background-color:#F6F6F6;\n"
+"}\n"
+"QTabWidget::tab-bar { alignment: center; }\n"
+"QTabBar::tab {\n"
 "    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
 "                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,\n"
 "                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);\n"
 "    background-color:#F6F6F6;\n"
-"     min-width: 12ex;\n"
+"    min-width: 12ex;\n"
 "    padding:0;\n"
 "    color: #AAA;\n"
 "    font-size: 16px;\n"
 "    font-family: \'PT Sans\';\n"
-" }\n"
+"}\n"
+"\n"
 "QTabBar::tab:selected {\n"
 "    color: #111;\n"
 "    font-size: 16px;\n"
 "    font-family: \'PT Sans\';\n"
 "    font-weight: bold;\n"
 "}\n"
-"QTabBar::tab:hover {\n"
-"    color:#111;\n"
-"}\n"
-"QLabel {\n"
-"    font-size: 16px;\n"
-"    font-family: \'PT Sans\';\n"
-"}")
+"\n"
+"QTabBar::tab:hover { color:#111; }\n"
+"QLabel { font-size: 16px; font-family: \'PT Sans\'; }")
+        self.SummaryFrame.setObjectName("SummaryFrame")
+        self.SummaryTabs = QtGui.QTabWidget(self.SummaryFrame)
+        self.SummaryTabs.setGeometry(QtCore.QRect(0, 4, 671, 297))
+        self.SummaryTabs.setAutoFillBackground(False)
+        self.SummaryTabs.setStyleSheet("")
         self.SummaryTabs.setObjectName("SummaryTabs")
         self.TodoTab = QtGui.QWidget()
         self.TodoTab.setObjectName("TodoTab")

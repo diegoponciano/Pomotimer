@@ -15,8 +15,8 @@ def changeActiveColor(obj, color):
     brush = QtGui.QBrush(color)
     brush.setStyle(QtCore.Qt.SolidPattern)
     palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Window, brush)
-    obj.setPalette(palette)
     obj.setAutoFillBackground(True)
+    obj.setPalette(palette)
 
 class HoverOpacity(QtCore.QObject):
     def eventFilter(self, obj, event):
@@ -265,15 +265,8 @@ class MainWindow(QtGui.QMainWindow):
 
         QtGui.QFontDatabase.addApplicationFont(os.path.join(config.assets_dir, 'PTS55F.ttf'))
 
-        #loader = QtUiTools.QUiLoader()
-        #uifile = QtCore.QFile(os.path.join(config.assets_dir, 'mainwindow.ui'))
-        #uifile.open(QtCore.QIODevice.ReadOnly)
-        #self.ui = loader.load(uifile)
-        
-        self.mainwindow = ui_mainwindow.Ui_MainWindow()
-        self.mainwindow.setupUi(self)
-        #print dir(self.mainwindow)
-        self.ui = self.mainwindow
+        self.ui = ui_mainwindow.Ui_MainWindow()
+        self.ui.setupUi(self)
 
         self.resize(670, 480)
         self.setCentralWidget(self.ui.centralwidget)
@@ -285,6 +278,7 @@ class MainWindow(QtGui.QMainWindow):
         #self.create_menus()
 
         self.todoListWidget = TodoListWidget(self, self.ui.listWidget)
+        #changeActiveColor(self.ui.SummaryTabs, QtGui.QColor(246,246,246))
 
     def dispose(self):
       self.todoListWidget.dispose()
