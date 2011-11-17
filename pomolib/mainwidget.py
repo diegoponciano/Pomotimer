@@ -95,12 +95,14 @@ class TodoListWidget(QtCore.QObject):
     new_taskStartButton.setGeometry(QtCore.QRect(5, -2, 24, 26))
 
     icon1 = QtGui.QIcon()
-    icon1.addPixmap(QtGui.QPixmap("assets/delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+    icon1.addPixmap(QtGui.QPixmap(os.path.join(config.assets_dir, 'delete.png')), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+    print os.path.join(config.assets_dir, 'delete.png')
     new_taskRemoveButton.setIcon(icon1)
     new_taskRemoveButton.setObjectName("taskRemoveButton_" + row)
 
     icon2 = QtGui.QIcon()
-    icon2.addPixmap(QtGui.QPixmap("assets/start.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+    icon2.addPixmap(QtGui.QPixmap(os.path.join(config.assets_dir, 'start.png')), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+    print os.path.join(config.assets_dir, 'start.png')
     new_taskStartButton.setIcon(icon2)
     new_taskStartButton.setObjectName("taskStartButton_" + row)
 
@@ -128,7 +130,7 @@ class TodoListWidget(QtCore.QObject):
 
     startBtn = self.item.findChild(QtGui.QToolButton, "taskStartButton_"+str(self.row))
     icon = QtGui.QIcon()
-    icon.addPixmap(QtGui.QPixmap("assets/stop.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+    icon.addPixmap(QtGui.QPixmap(os.path.join(config.assets_dir, 'stop.png')), QtGui.QIcon.Normal, QtGui.QIcon.Off)
     startBtn.setIcon(icon)
     self.start_event = self.on_stop_clicked 
 
@@ -140,7 +142,7 @@ class TodoListWidget(QtCore.QObject):
     if reply == QtGui.QMessageBox.Yes:
       startBtn = self.item.findChild(QtGui.QToolButton, "taskStartButton_"+str(self.row))
       icon = QtGui.QIcon()
-      icon.addPixmap(QtGui.QPixmap("assets/start.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+      icon.addPixmap(QtGui.QPixmap(os.path.join(config.assets_dir, 'start.png')), QtGui.QIcon.Normal, QtGui.QIcon.Off)
       startBtn.setIcon(icon)
       self.enableItems()
       self.start_event = self.on_start_clicked 
