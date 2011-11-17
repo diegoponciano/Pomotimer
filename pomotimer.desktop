@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Version=1.0
 Type=Application
-Name=PySide app
-Exec=/usr/bin/pomotimer
+Name=Pomotimer
+Exec=pomotimer
 Icon=pomotimer
 Categories=Development;

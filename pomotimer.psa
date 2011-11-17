@@ -1,11 +1,11 @@
 [Project]
 category = Development
-maintainer = Diego
-appname = PySide app
+maintainer = Diego Ponciano
+appname = Pomotimer
 section = development
 pyversion = 2.7
 project = pomotimer
-email = email@example.com
-desc = A PySide example
+email = diego@diegoponciano.com
+desc = A simple Pomodoro timer
 template = ubuntu-qtgui
 
