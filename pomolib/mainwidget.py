@@ -7,6 +7,8 @@ from PySide import QtUiTools
 from PySide import QtGui
 import os
 import todolist
+import config
+import ui_mainwindow
 
 def changeActiveColor(obj, color):
     palette = QtGui.QPalette()
@@ -130,7 +132,7 @@ class TodoListWidget(QtCore.QObject):
     startBtn.setIcon(icon)
     self.start_event = self.on_stop_clicked 
 
-    self.pomotimer = PomoTimer(self.window.TimerLabel, 25*60, self.tomatoFinished)
+    self.pomotimer = PomoTimer(self.window.ui.TimerLabel, 25*60, self.tomatoFinished)
     self.pomotimer.start()
   
   def on_stop_clicked(self, pressed, item):
@@ -261,13 +263,20 @@ class MainWindow(QtGui.QMainWindow):
     def __init__(self, parent=None):
         QtGui.QMainWindow.__init__(self, parent=parent)
 
-        QtGui.QFontDatabase.addApplicationFont("assets/PTS55F.ttf")
+        QtGui.QFontDatabase.addApplicationFont(os.path.join(config.assets_dir, 'PTS55F.ttf'))
 
-        loader = QtUiTools.QUiLoader()
-        uifile = QtCore.QFile("./mainwindow.ui")
-        self.ui = loader.load(uifile)
+        #loader = QtUiTools.QUiLoader()
+        #uifile = QtCore.QFile(os.path.join(config.assets_dir, 'mainwindow.ui'))
+        #uifile.open(QtCore.QIODevice.ReadOnly)
+        #self.ui = loader.load(uifile)
+        
+        self.mainwindow = ui_mainwindow.Ui_MainWindow()
+        self.mainwindow.setupUi(self)
+        #print dir(self.mainwindow)
+        self.ui = self.mainwindow
+
         self.resize(670, 480)
-        self.setCentralWidget(self.ui)
+        self.setCentralWidget(self.ui.centralwidget)
 
         self.ui.AddTaskButton.clicked[bool].connect(self.on_addTask_clicked)
         self.ui.statusbar.messageChanged.connect(self.on_statusbar_messageChanged)
@@ -275,7 +284,7 @@ class MainWindow(QtGui.QMainWindow):
         QtCore.QMetaObject.connectSlotsByName(self.ui.centralwidget)
         #self.create_menus()
 
-        self.todoListWidget = TodoListWidget(self.ui, self.ui.listWidget)
+        self.todoListWidget = TodoListWidget(self, self.ui.listWidget)
 
     def dispose(self):
       self.todoListWidget.dispose()

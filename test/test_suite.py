@@ -3,7 +3,6 @@
 import os
 import sys
 import unittest
-import pprint
 
 path = os.path.abspath(os.path.dirname(__file__))
 src_dir = os.path.join(path, os.pardir)
