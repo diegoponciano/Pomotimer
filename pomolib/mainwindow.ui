@@ -135,10 +135,13 @@ QPushButton:default {
       <x>0</x>
       <y>46</y>
       <width>661</width>
-      <height>161</height>
+      <height>155</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="StartGrid">
+     <property name="spacing">
+      <number>0</number>
+     </property>
      <item row="0" column="0">
       <spacer name="LeftSpacer">
        <property name="orientation">
@@ -186,9 +189,9 @@ QPushButton:default {
    <widget class="QFrame" name="SummaryFrame">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>-2</x>
       <y>204</y>
-      <width>669</width>
+      <width>671</width>
       <height>267</height>
      </rect>
     </property>
@@ -199,19 +202,15 @@ QPushButton:default {
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">#SummaryTabs {
+     <string notr="true">#SummaryFrame {
 	background-color:rgb(246, 246, 246);
-	border-top: 3px solid #C2C7CB;
-
+	border:1px solid #ccc;
 }
-QTabWidget {
-	background-color:#F6F6F6;
 
-}
 QTabWidget::pane { 
 	border:0;
 	position: absolute;
-	/*top: -0.5em;*/
+	top: -0.5em;
 	background-color:#F6F6F6;
 }
 QTabWidget::tab-bar { alignment: center; }
@@ -240,9 +239,9 @@ QLabel { font-size: 16px; font-family: 'PT Sans'; }</string>
     <widget class="QTabWidget" name="SummaryTabs">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>-4</x>
        <y>4</y>
-       <width>671</width>
+       <width>675</width>
        <height>297</height>
       </rect>
      </property>

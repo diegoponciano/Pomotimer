@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'pomolib/mainwindow.ui'
 #
-# Created: Thu Nov 17 03:11:08 2011
+# Created: Thu Nov 17 03:35:55 2011
 #      by: pyside-uic 0.2.13 running on PySide 1.0.8
 #
 # WARNING! All changes made in this file will be lost!
@@ -99,9 +99,10 @@ class Ui_MainWindow(object):
         self.LongBreakButton.setObjectName("LongBreakButton")
         self.ButtonsGrid.addWidget(self.LongBreakButton, 0, 2, 1, 1)
         self.gridLayoutWidget_2 = QtGui.QWidget(self.centralwidget)
-        self.gridLayoutWidget_2.setGeometry(QtCore.QRect(0, 46, 661, 161))
+        self.gridLayoutWidget_2.setGeometry(QtCore.QRect(0, 46, 661, 155))
         self.gridLayoutWidget_2.setObjectName("gridLayoutWidget_2")
         self.StartGrid = QtGui.QGridLayout(self.gridLayoutWidget_2)
+        self.StartGrid.setSpacing(0)
         self.StartGrid.setContentsMargins(0, 0, 0, 0)
         self.StartGrid.setObjectName("StartGrid")
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -119,24 +120,20 @@ class Ui_MainWindow(object):
         self.TimerLabel.setObjectName("TimerLabel")
         self.StartGrid.addWidget(self.TimerLabel, 0, 1, 1, 1)
         self.SummaryFrame = QtGui.QFrame(self.centralwidget)
-        self.SummaryFrame.setGeometry(QtCore.QRect(0, 204, 669, 267))
+        self.SummaryFrame.setGeometry(QtCore.QRect(-2, 204, 671, 267))
         font = QtGui.QFont()
         font.setFamily("PT Sans")
         font.setPointSize(14)
         self.SummaryFrame.setFont(font)
-        self.SummaryFrame.setStyleSheet("#SummaryTabs {\n"
+        self.SummaryFrame.setStyleSheet("#SummaryFrame {\n"
 "    background-color:rgb(246, 246, 246);\n"
-"    border-top: 3px solid #C2C7CB;\n"
-"\n"
+"    border:1px solid #ccc;\n"
 "}\n"
-"QTabWidget {\n"
-"    background-color:#F6F6F6;\n"
 "\n"
-"}\n"
 "QTabWidget::pane { \n"
 "    border:0;\n"
 "    position: absolute;\n"
-"    /*top: -0.5em;*/\n"
+"    top: -0.5em;\n"
 "    background-color:#F6F6F6;\n"
 "}\n"
 "QTabWidget::tab-bar { alignment: center; }\n"
@@ -163,7 +160,7 @@ class Ui_MainWindow(object):
 "QLabel { font-size: 16px; font-family: \'PT Sans\'; }")
         self.SummaryFrame.setObjectName("SummaryFrame")
         self.SummaryTabs = QtGui.QTabWidget(self.SummaryFrame)
-        self.SummaryTabs.setGeometry(QtCore.QRect(0, 4, 671, 297))
+        self.SummaryTabs.setGeometry(QtCore.QRect(-4, 4, 675, 297))
         self.SummaryTabs.setAutoFillBackground(False)
         self.SummaryTabs.setStyleSheet("")
         self.SummaryTabs.setObjectName("SummaryTabs")
